@@ -34,22 +34,22 @@ const Hero = () => {
             <div className="w-1 sm:h-80 h-40 bw-gradient sm:hidden" />
           </div>
 
-          <div>
-            <h1
-              className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
-              Hi, I'm{' '}
-              <span
-                className="sm:text-battleGray sm:text-[90px] 
-                text-eerieBlack text-[50px] font-mova
-                font-extrabold uppercase">
-                Shaquille
-              </span>
-            </h1>
-            <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
-              Lorem ipsum dolor sit amet. <br className="sm:block hidden" />
-              consectetur adipisicing elit deleniti, voluptas.
-            </p>
-          </div>
+          <div className="-translate-x-[280px]">
+  <h1
+    className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
+    Hi, IAM {''}
+    <br></br>
+    <span
+      className="sm:text-battleGray sm:text-[90px] 
+      text-eerieBlack text-[50px] font-mova
+      font-extrabold uppercase">
+      RANDALL
+    </span>
+  </h1>
+  <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
+   A results-driven Full Stack Developer specializing in backend systems and DevOps, with deep expertise in the MERN stack. I build scalable, maintainable, and high-performance web applications that drive business growth and elevate user experiences.
+  </p>
+</div>
           <div
             className="w-screen flex flex-col items-start 
             justify-center sm:-ml-[3rem] xxs:mt-4"></div>
@@ -84,10 +84,11 @@ const Hero = () => {
         <div>
           <img
             className="absolute bottom-0 ml-[50vw] 
-            lg:ml-[75vw] md:ml-[60vw] xmd:ml-[60vw] 2xl:ml-[83vw]
-            sm:h-[90vh] md:h-[70vh] xl:h-[80vh]"
+    lg:ml-[75vw] md:ml-[60vw] xmd:ml-[60vw] 2xl:ml-[83vw]
+    sm:h-[90vh] md:h-[70vh] xl:h-[80vh] 
+    -translate-x-[200px]"
             src={shaq}
-            alt="shaquille"
+            alt="randall"
           />
         </div>
       </section>

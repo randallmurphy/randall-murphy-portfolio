@@ -37,12 +37,7 @@ const About = () => {
       <motion.p
         variants={fadeIn('', '', 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
-        sapiente ipsum dolorum dicta eaque cumque inventore molestias, beatae ea
-        quaerat alias accusamus voluptas autem! Alias odit voluptates in totam
-        vitae dignissimos minus eaque culpa unde tempore dolore aperiam
-        obcaecati voluptatum aliquam corrupti, suscipit accusamus! Odit unde
-        veniam dolorum ipsum doloribus.
+       I’m a versatile Full Stack Developer with a strong foundation in backend development and DevOps, specializing in the MERN stack. I design and deliver scalable, reliable, and efficient web applications that solve real business problems. My expertise spans modern JavaScript frameworks, cloud infrastructure, and continuous integration, empowering teams to ship quality software faster. Always hungry to innovate, I bring both technical skill and a growth mindset to every project, making me the go-to partner for companies ready to level up their digital presence.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">

@@ -27,7 +27,19 @@ import {
   dcc,
   kelhel,
   microverse,
+  
 } from '../assets';
+
+import mern from '../assets/icons/mern.png'
+import aws from '../assets/icons/aws.png'
+import mongodb from '../assets/tech/mongodb.png'
+import bootstrap from '../assets/tech/bootstrap.png'
+import material from '../assets/tech/material.png'
+import vite from '../assets/tech/vite.png'
+
+
+
+
 
 export const navLinks = [
   {
@@ -46,7 +58,7 @@ export const navLinks = [
 
 const services = [
   {
-    title: 'Frontend Developer',
+    title: 'Frontend Developer ',
     icon: frontend,
   },
   {
@@ -58,9 +70,18 @@ const services = [
     icon: ux,
   },
   {
-    title: 'Software Prototyping',
+    title: 'MERN stack developer',
+    icon: mern,
+  },
+  {
+    title: 'CIW jS specialist',
     icon: prototyping,
   },
+  {
+    title: 'AWS solutions architect',
+    icon: aws,
+  }
+  
 ];
 
 const technologies = [
@@ -77,8 +98,8 @@ const technologies = [
     icon: javascript,
   },
   {
-    name: 'TypeScript',
-    icon: typescript,
+    name: 'Bootstrap',
+    icon: bootstrap,
   },
   {
     name: 'React JS',
@@ -96,30 +117,27 @@ const technologies = [
     name: 'Node JS',
     icon: nodejs,
   },
+  
   {
-    name: 'Rails',
-    icon: rubyrails,
+    name: 'mui',
+    icon: material,
   },
   {
-    name: 'graphql',
-    icon: graphql,
-  },
-  {
-    name: 'postgresql',
-    icon: postgresql,
+    name: 'mongodb',
+    icon: mongodb,
   },
   {
     name: 'git',
     icon: git,
   },
   {
-    name: 'figma',
-    icon: figma,
+    name: 'vite',
+    icon: vite,
   },
-  {
-    name: 'docker',
-    icon: docker,
-  },
+  // {
+  //   name: 'docker',
+  //   icon: docker,
+  // },
 ];
 
 const experiences = [
