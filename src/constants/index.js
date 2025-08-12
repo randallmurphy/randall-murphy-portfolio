@@ -183,8 +183,8 @@ const experiences = [
 const projects = [
   {
     id: 'project-1',
-    name: 'KomiKult',
-    description: 'A comic characters list app that displays Marvel characters.',
+    name: 'create-murphy-backend',
+    description: '💻 Rapid backend scaffolding — Express + Mongoose in seconds.',
     tags: [
       {
         name: 'react',
@@ -195,19 +195,19 @@ const projects = [
         color: 'green-text-gradient',
       },
       {
-        name: 'tailwind',
+        name: 'express',
         color: 'pink-text-gradient',
       },
     ],
     image: komikult,
-    repo: 'https://github.com/shaqdeff/KomiKult',
-    demo: 'https://shaqdeff.github.io/KomiKult/',
+    repo: 'https://github.com/randallmurphy/create-murphy-backend',
+    demo: 'https://www.npmjs.com/package/create-murphy-backend',
   },
   {
     id: 'project-2',
-    name: 'Leaderboard',
+    name: 'wealthMap',
     description:
-      'A leaderboard list app that displays scores submitted by different players.',
+      'cash flow budgeting app inc/expense asset/liab.',
     tags: [
       {
         name: 'react',
@@ -223,13 +223,13 @@ const projects = [
       },
     ],
     image: leaderboard,
-    repo: 'https://github.com/shaqdeff/Leaderboard',
+    repo: 'https://github.com/randallmurphy/wealthMap',
     demo: 'https://shaqdeff.github.io/Leaderboard/',
   },
   {
     id: 'project-3',
-    name: 'Math Magicians',
-    description: 'This is a single-page calculator app built with React',
+    name: 'wish upon a star',
+    description: 'make a wish upon a star',
     tags: [
       {
         name: 'nextjs',
@@ -245,7 +245,7 @@ const projects = [
       },
     ],
     image: math,
-    repo: 'https://github.com/shaqdeff/Math-Magicians',
+    repo: 'https://github.com/randallmurphy/wishUponAStar/settings/pages',
     demo: 'https://inspiring-medovik-37d3b3.netlify.app/',
   },
   {
