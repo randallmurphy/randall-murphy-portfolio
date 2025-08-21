@@ -237,7 +237,7 @@ const projects = [
     ],
     image: perfectClean,
     repo: 'https://github.com/randallmurphy/perfect-cleaning-',
-    demo: '',
+    demo: 'perfectcleaning.com',
   },
   {
     id: 'project-4',
