@@ -49,7 +49,7 @@ import math from './projects/math-magicians.png';
 import movie from './projects/movie-metro.png';
 import nyeusi from './projects/nyeusi.png';
 import space from './projects/space-hub.png';
-
+import ramResume from './personal/Randall_Murphy_Resume.pdf'
 export {
   bwmap,
   nairobi,
@@ -96,4 +96,5 @@ export {
   dcc,
   kelhel,
   microverse,
+  ramResume
 };
