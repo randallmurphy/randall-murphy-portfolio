@@ -12,10 +12,7 @@ import {
   nodejs,
   git,
   nyeusi,
-  npmCreateMurphyBackend,
-  wealthMap,
-  perfectClean,
-  todoApp,
+  
   
   
 } from '../assets';
@@ -30,6 +27,10 @@ import vite from '../assets/tech/vite.png'
 import persevere from '../assets/icons/persevere.png'
 import ciw from '../assets/icons/ciw.png'
 import freecodecamp from '../assets/icons/freecodecamp.png'
+import npmCreateMurphyBackend from '../assets/projects/npmCreateMurphyBackend.jpg'
+import wealthMap from '../assets/projects/wealthMap.jpg'
+import perfectClean from '../assets/projects/perfectClean.jpg'   
+import todoApp from '../assets/projects/perfectClean.jpg'   
 
 
 export const navLinks = [
