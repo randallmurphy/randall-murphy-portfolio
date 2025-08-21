@@ -30,7 +30,7 @@ import freecodecamp from '../assets/icons/freecodecamp.png'
 import npmCreateMurphyBackend from '../assets/projects/npmCreateMurphyBackend.jpg'
 import wealthMap from '../assets/projects/wealthMap.jpg'
 import perfectClean from '../assets/projects/perfectClean.jpg'   
-import todoApp from '../assets/projects/perfectClean.jpg'   
+import todoApp from '../assets/projects/todoApp.jpg'   
 
 
 export const navLinks = [
