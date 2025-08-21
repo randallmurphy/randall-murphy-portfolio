@@ -9,7 +9,6 @@ import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { download, downloadHover, resume } from '../assets';
 import { textVariant } from '../utils/motion';
-import ramResume from '../assets/personal/Randall_Murphy_Resume.pdf';
 import { useState } from 'react';
 
 const ExperienceCard = ({ experience }) => (
@@ -98,7 +97,7 @@ const Experience = () => {
               </div>
             }>
             <a
-              href={ramResume}
+              href="../assets/personal/Randall_Murphy_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="live-demo flex justify-between 
