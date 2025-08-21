@@ -7,9 +7,9 @@ import 'react-vertical-timeline-component/style.min.css';
 import { styles } from '../styles';
 import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
-import { download, downloadHover, ramResume, resume} from '../assets';
+import { download, downloadHover, resume } from '../assets';
 import { textVariant } from '../utils/motion';
-
+import { useState } from 'react';
 
 const ExperienceCard = ({ experience }) => (
   <VerticalTimelineElement
@@ -53,6 +53,8 @@ const ExperienceCard = ({ experience }) => (
 );
 
 const Experience = () => {
+  const [iconSrc, setIconSrc] = useState(download);
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -69,6 +71,8 @@ const Experience = () => {
           {experiences.map((experience, index) => (
             <ExperienceCard key={index} experience={experience} />
           ))}
+
+          {/* Resume Element */}
           <VerticalTimelineElement
             contentStyle={{
               background: '#eaeaec',
@@ -101,27 +105,15 @@ const Experience = () => {
               sm:mt-[22px] mt-[16px] hover:bg-battleGray 
               hover:text-eerieBlack transition duration-[0.2s] 
               ease-in-out"
-              onClick={() =>
-                window.open(
-                  ramResume, //paste the link to your resume here
-                  '_blank'
-                )
-              }
-              onMouseOver={() => {
-                document
-                  .querySelector('.download-btn')
-                  .setAttribute('src', downloadHover);
-              }}
-              onMouseOut={() => {
-                document
-                  .querySelector('.download-btn')
-                  .setAttribute('src', download);
-              }}>
+              onClick={() => window.open('/Randall_Murphy_Resume.pdf', '_blank')}
+              onMouseEnter={() => setIconSrc(downloadHover)}
+              onMouseLeave={() => setIconSrc(download)}
+            >
               MY RESUME
               <img
-                src={download}
+                src={iconSrc}
                 alt="download"
-                className="download-btn sm:w-[26px] sm:h-[26px] 
+                className="sm:w-[26px] sm:h-[26px] 
                 w-[23px] h-[23px] object-contain"
               />
             </button>
