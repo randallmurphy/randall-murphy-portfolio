@@ -19,13 +19,20 @@ const Ball = memo(({ imgUrl }: BallProps) => {
   const [decal] = useTexture([imgUrl]);
 
   return (
-    <Float speed={2.5} rotationIntensity={1} floatIntensity={2}>
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[0, 0, 0.05]} />
-      <mesh castShadow receiveShadow scale={2.75}>
+    <Float speed={2.2} rotationIntensity={0.8} floatIntensity={1.8}>
+      {/* Multi-light rig for 3D depth */}
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[2, 2, 2]} intensity={0.9} castShadow />
+      <directionalLight position={[-2, -1, -1]} intensity={0.25} color="#6688cc" />
+      <pointLight position={[0, 3, 2]} intensity={0.6} color="#ffffff" />
+      <pointLight position={[0, -3, -2]} intensity={0.15} color="#334466" />
+
+      <mesh castShadow receiveShadow scale={2.6}>
         <icosahedronGeometry args={[1, 2]} />
         <meshStandardMaterial
-          color="#3d3d3d"
+          color="#3a3a4a"
+          metalness={0.25}
+          roughness={0.45}
           polygonOffset
           polygonOffsetFactor={-5}
           flatShading
@@ -50,8 +57,13 @@ const BallCanvas = ({ icon }: BallCanvasProps) => {
     <Canvas
       frameloop="always"
       dpr={[1, 1.5]}
-      gl={{ preserveDrawingBuffer: true, antialias: false, powerPreference: 'high-performance' }}
-      camera={{ position: [0, 0, 5], fov: 45 }}
+      shadows
+      gl={{
+        preserveDrawingBuffer: true,
+        antialias: false,
+        powerPreference: 'high-performance',
+      }}
+      camera={{ position: [0, 0, 5], fov: 42 }}
     >
       <Suspense fallback={<Loader />}>
         <OrbitControls enableZoom={false} enablePan={false} />

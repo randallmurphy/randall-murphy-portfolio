@@ -1,3 +1,4 @@
+import { Toaster } from 'sonner';
 import {
   About,
   Contact,
@@ -6,11 +7,28 @@ import {
   Navbar,
   Tech,
   Projects,
+  ScrollToTop,
 } from '@/components';
 
 export default function Home() {
   return (
     <div className="relative z-0">
+      {/* Global toast notifications */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: 'rgba(41, 41, 41, 0.9)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            color: '#d4d4d8',
+            borderRadius: '12px',
+            fontSize: '15px',
+          },
+        }}
+        richColors
+      />
+
       <div>
         <Navbar />
         <Hero />
@@ -39,6 +57,9 @@ export default function Home() {
       <div className="relative z-0">
         <Contact />
       </div>
+
+      {/* Fixed return-to-top */}
+      <ScrollToTop />
     </div>
   );
 }

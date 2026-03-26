@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { toast } from 'sonner';
 import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
@@ -15,9 +16,11 @@ interface FormState {
   message: string;
 }
 
+const EMPTY_FORM: FormState = { name: '', email: '', message: '' };
+
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
-  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
+  const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [loading, setLoading] = useState(false);
   const [sendIcon, setSendIcon] = useState(toSrc(send));
 
@@ -49,91 +52,94 @@ const Contact = () => {
         )
         .then(() => {
           setLoading(false);
-          alert('Thank you. I will get back to you as soon as possible.');
-          setForm({ name: '', email: '', message: '' });
+          toast.success('Message sent! I\'ll get back to you soon.', {
+            duration: 5000,
+          });
+          setForm(EMPTY_FORM);
         })
         .catch((error: unknown) => {
           setLoading(false);
           console.error(error);
-          alert('Something went wrong. Please try again.');
+          toast.error('Something went wrong. Please try again.', {
+            duration: 5000,
+          });
         });
     },
     [form]
   );
 
   return (
-    <div className="flex overflow-hidden">
+    <div className="flex justify-center overflow-hidden">
       <motion.div
-        variants={slideIn('left', 'tween', 0.2, 1)}
-        className="w-full max-w-2xl bg-jet p-8 rounded-2xl glassmorphism-dark">
+        variants={slideIn('left', 'tween', 0.2, 0.8)}
+        className="w-full max-w-2xl contact-glass rounded-2xl p-8 sm:p-10">
+
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-6 font-poppins">
-          <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Name</span>
+          className="mt-8 sm:mt-10 flex flex-col gap-5 font-poppins">
+
+          <label className="flex flex-col gap-3">
+            <span className="text-timberWolf font-medium text-[15px]">Your Name</span>
             <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
               placeholder="What's your name?"
-              className="bg-eerieBlack py-4 px-6
-              placeholder:text-taupe text-timberWolf
-              rounded-lg outline-none border-none font-medium
-              focus:ring-2 focus:ring-taupe/40 transition-all duration-200"
+              required
+              className="contact-input"
             />
           </label>
-          <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Email</span>
+
+          <label className="flex flex-col gap-3">
+            <span className="text-timberWolf font-medium text-[15px]">Your Email</span>
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
               placeholder="What's your email?"
-              className="bg-eerieBlack py-4 px-6
-              placeholder:text-taupe text-timberWolf
-              rounded-lg outline-none border-none font-medium
-              focus:ring-2 focus:ring-taupe/40 transition-all duration-200"
+              required
+              className="contact-input"
             />
           </label>
-          <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Message</span>
+
+          <label className="flex flex-col gap-3">
+            <span className="text-timberWolf font-medium text-[15px]">Your Message</span>
             <textarea
               rows={7}
               name="message"
               value={form.message}
               onChange={handleChange}
               placeholder="What's your message?"
-              className="bg-eerieBlack py-4 px-6
-              placeholder:text-taupe text-timberWolf
-              rounded-lg outline-none border-none font-medium resize-none
-              focus:ring-2 focus:ring-taupe/40 transition-all duration-200"
+              required
+              className="contact-input resize-none"
             />
           </label>
 
           <button
             type="submit"
-            className="live-demo flex justify-center sm:gap-4
-            gap-3 sm:text-[20px] text-[16px] text-timberWolf
-            font-bold font-beckman items-center py-5
-            whitespace-nowrap sm:w-[130px] sm:h-[50px]
-            w-[100px] h-[45px] rounded-[10px] bg-night
-            hover:bg-battleGray hover:text-eerieBlack
-            transition duration-200 ease-in-out
-            disabled:opacity-60 disabled:cursor-not-allowed"
             disabled={loading}
+            className="live-demo flex justify-center items-center
+            sm:gap-4 gap-3 sm:text-[20px] text-[16px] text-timberWolf
+            font-bold font-beckman py-4 mt-2
+            whitespace-nowrap sm:w-[130px] sm:h-[50px]
+            w-[110px] h-[46px] rounded-[12px]
+            contact-btn-submit
+            hover:bg-battleGray hover:text-eerieBlack
+            transition-all duration-200 ease-out
+            disabled:opacity-50 disabled:cursor-not-allowed"
             onMouseEnter={() => setSendIcon(toSrc(sendHover))}
             onMouseLeave={() => setSendIcon(toSrc(send))}>
-            {loading ? 'Sending' : 'Send'}
+            {loading ? 'Sending…' : 'Send'}
             <img
               src={sendIcon}
               alt="send"
-              className="sm:w-[26px] sm:h-[26px] w-[23px] h-[23px] object-contain"
+              className="sm:w-[24px] sm:h-[24px] w-[20px] h-[20px] object-contain"
             />
           </button>
         </form>
