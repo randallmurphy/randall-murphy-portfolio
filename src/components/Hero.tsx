@@ -8,68 +8,94 @@ import { toSrc } from '../utils/image';
 const Hero = () => {
   return (
     <>
-      <div className="absolute top-0 left-0 z-0 h-[100vh] w-screen">
+      {/* Background maps */}
+      <div className="absolute top-0 left-0 z-0 h-[100svh] w-screen pointer-events-none">
         <img
           src={toSrc(bwmap)}
-          alt="world map"
+          alt=""
+          aria-hidden="true"
           className="w-full h-full sm:block hidden object-cover"
         />
       </div>
-      <div className="absolute top-0 left-0 z-0 h-[100vh] w-screen">
+      <div className="absolute top-0 left-0 z-0 h-[100svh] w-screen pointer-events-none">
         <img
           src={toSrc(worldmap)}
-          alt="world map"
+          alt=""
+          aria-hidden="true"
           className="w-full h-full sm:hidden block object-cover"
         />
       </div>
-      <section
-        className="relative flex sm:flex-row flex-col w-full h-screen mx-auto
-        sm:bg-hero bg-hero-mobile overflow-hidden">
-        <div
-          className={`absolute inset-0 sm:top-[250px] top-[150px]
-          lg:top-[150px] xl:top-[250px] ${styles.paddingX}
-          max-w-7xl mx-auto flex flex-row items-start
-          justify-between gap-3`}>
-          <div className="flex flex-col justify-center items-center mt-5 ml-3">
-            <div className="w-5 h-5 rounded-full bg-[#0a0a0a] sm:hidden" />
-            <div className="w-1 sm:h-80 h-40 bw-gradient sm:hidden" />
-          </div>
 
-          <div className="-translate-x-[280px]">
-            <h1
-              className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
-              Hi, IAM{' '}
-              <br />
-              <span
-                className="sm:text-battleGray sm:text-[90px]
-                text-eerieBlack text-[50px] font-mova
-                font-extrabold uppercase">
-                RANDALL
-              </span>
-            </h1>
-            <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
-              A results-driven Full Stack Developer specializing in backend
-              systems and DevOps, with deep expertise in the MERN stack. I build
-              scalable, maintainable, and high-performance web applications that
-              drive business growth and elevate user experiences.
-            </p>
-          </div>
+      <section className="relative w-full h-[100svh] overflow-hidden sm:bg-hero bg-hero-mobile">
 
-          <div
-            className="w-screen flex flex-col items-start
-            justify-center sm:-ml-[3rem] xxs:mt-4"
-          />
-          <div />
+        {/* Mobile: vertical dot + line decoration */}
+        <div className="absolute top-[150px] left-5 z-10 sm:hidden flex flex-col items-center">
+          <div className="w-5 h-5 rounded-full bg-[#0a0a0a]" />
+          <div className="w-1 h-40 bw-gradient" />
         </div>
 
+        {/* ── Text content ── */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+          className={`
+            absolute z-10
+            top-[130px] xs:top-[140px] sm:top-[190px] lg:top-[155px] xl:top-[210px] 2xl:top-[240px]
+            left-6 sm:left-16
+            lg:left-[max(4rem,calc(50vw_-_38rem))]
+            w-[calc(100vw_-_3rem)] xs:w-[340px] sm:w-[460px] md:w-[500px] lg:w-[540px] xl:w-[600px]
+          `}
+        >
+          <h1
+            className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
+            Hi, IAM{' '}
+            <br />
+            <span
+              className="sm:text-battleGray sm:text-[90px]
+              text-eerieBlack text-[50px] font-mova
+              font-extrabold uppercase">
+              RANDALL
+            </span>
+          </h1>
+          <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
+            A results-driven Full Stack Developer specializing in backend
+            systems and DevOps, with deep expertise in the MERN stack. I build
+            scalable, maintainable, and high-performance web applications that
+            drive business growth and elevate user experiences.
+          </p>
+        </motion.div>
+
+        {/* ── Personal photo ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.1, delay: 0.3 }}
+          className="absolute bottom-0 z-10
+            right-0
+            sm:right-[1vw] md:right-[3vw] lg:right-[4vw] xl:right-[7vw] 2xl:right-[11vw]"
+        >
+          <img
+            src={toSrc(shaq)}
+            alt="Randall Murphy"
+            className="
+              h-[56vh] xs:h-[60vh] sm:h-[82vh] md:h-[76vh] lg:h-[88vh] xl:h-[92vh]
+              w-auto object-contain object-bottom
+              max-w-none
+            "
+          />
+        </motion.div>
+
+        {/* ── Scroll indicator ── */}
         <div
-          className="absolute xs:bottom-10 bottom-32 w-full
-          flex justify-center items-center">
-          <a href="#about">
+          className="absolute xs:bottom-10 bottom-8 w-full
+          flex justify-center items-center z-10">
+          <a href="#about" aria-label="Scroll to about section">
             <div
               className="w-[35px] h-[64px] rounded-3xl border-4
-            border-french border-dim flex
-            justify-center items-start p-2">
+              border-french border-dim flex
+              justify-center items-start p-2
+              hover:border-taupe transition-colors duration-300">
               <motion.div
                 animate={{ y: [0, 24, 0] }}
                 transition={{
@@ -81,17 +107,6 @@ const Hero = () => {
               />
             </div>
           </a>
-        </div>
-
-        <div>
-          <img
-            className="absolute bottom-0 ml-[50vw]
-            lg:ml-[75vw] md:ml-[60vw] xmd:ml-[60vw] 2xl:ml-[83vw]
-            sm:h-[90vh] md:h-[70vh] xl:h-[80vh]
-            -translate-x-[200px]"
-            src={toSrc(shaq)}
-            alt="randall"
-          />
         </div>
       </section>
     </>

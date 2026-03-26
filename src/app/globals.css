@@ -176,9 +176,15 @@
 }
 
 .hash-span {
-  margin-top: -100px;
-  padding-bottom: 100px;
+  margin-top: -80px;
+  padding-bottom: 80px;
   display: block;
+}
+
+/* Smooth image rendering */
+img {
+  -webkit-font-smoothing: antialiased;
+  image-rendering: auto;
 }
 
 /* ── Vertical timeline ── */
@@ -203,6 +209,22 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Glassmorphism for dark bg sections (Contact, etc.) */
+.glassmorphism-dark {
+  background: rgba(41, 41, 41, 0.85);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glassmorphism variant for light bg cards */
+.glassmorphism-card {
+  background: rgba(51, 51, 51, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .card-shadow {

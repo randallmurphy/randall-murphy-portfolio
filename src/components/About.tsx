@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { services, type Service } from '../constants';
@@ -11,24 +12,32 @@ interface ServiceCardProps extends Service {
   index: number;
 }
 
-const ServiceCard = ({ index, title, icon }: ServiceCardProps) => (
+const ServiceCard = memo(({ index, title, icon }: ServiceCardProps) => (
   <motion.div
     variants={fadeIn('right', 'spring', 0.5 * index, 0.75)}
-    className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card">
-    <div className="bg-jetLight rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col">
+    className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card
+               hover:scale-[1.03] transition-transform duration-300 will-change-transform">
+    <div
+      className="bg-jetLight rounded-[20px] py-5 px-12
+      min-h-[280px] flex justify-evenly items-center flex-col
+      glassmorphism-card">
       <img
         src={toSrc(icon)}
         alt={title}
         className="w-16 h-16 object-contain"
+        loading="lazy"
       />
-      <h3 className="text-taupe text-[18px] font-bold text-center">{title}</h3>
+      <h3 className="text-taupe text-[18px] font-bold text-center leading-snug">
+        {title}
+      </h3>
     </div>
   </motion.div>
-);
+));
+ServiceCard.displayName = 'ServiceCard';
 
 const About = () => {
   return (
-    <div className="-mt-[6rem]">
+    <div>
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}>Introduction</p>
         <h2 className={styles.sectionHeadText}>Overview.</h2>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, memo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import {
   Decal,
@@ -15,7 +15,7 @@ interface BallProps {
   imgUrl: string;
 }
 
-const Ball = ({ imgUrl }: BallProps) => {
+const Ball = memo(({ imgUrl }: BallProps) => {
   const [decal] = useTexture([imgUrl]);
 
   return (
@@ -38,7 +38,8 @@ const Ball = ({ imgUrl }: BallProps) => {
       </mesh>
     </Float>
   );
-};
+});
+Ball.displayName = 'Ball';
 
 interface BallCanvasProps {
   icon: string;
@@ -46,9 +47,14 @@ interface BallCanvasProps {
 
 const BallCanvas = ({ icon }: BallCanvasProps) => {
   return (
-    <Canvas frameloop="always" gl={{ preserveDrawingBuffer: true }}>
+    <Canvas
+      frameloop="always"
+      dpr={[1, 1.5]}
+      gl={{ preserveDrawingBuffer: true, antialias: false, powerPreference: 'high-performance' }}
+      camera={{ position: [0, 0, 5], fov: 45 }}
+    >
       <Suspense fallback={<Loader />}>
-        <OrbitControls enableZoom={false} />
+        <OrbitControls enableZoom={false} enablePan={false} />
         <Ball imgUrl={icon} />
       </Suspense>
       <Preload all />
