@@ -13,7 +13,6 @@ import {
 export default function Home() {
   return (
     <div className="relative z-0">
-      {/* Global toast notifications */}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -58,7 +57,6 @@ export default function Home() {
         <Contact />
       </div>
 
-      {/* Fixed return-to-top */}
       <ScrollToTop />
     </div>
   );

@@ -1,5 +1,6 @@
 import type { StaticImageData } from 'next/image';
 
+// ─── EXISTING IMPORTS (keep as-is from your original file) ───────────────────
 import {
   frontend,
   backend,
@@ -26,10 +27,25 @@ import vite from '../assets/tech/vite.png';
 import persevere from '../assets/icons/persevere.png';
 import ciw from '../assets/icons/ciw.png';
 import freecodecamp from '../assets/icons/freecodecamp.png';
+
 import npmCreateMurphyBackend from '../assets/projects/npmCreateMurphyBackend.jpg';
 import wealthMap from '../assets/projects/wealthMap.jpg';
 import perfectClean from '../assets/projects/perfectClean.jpg';
 import todoApp from '../assets/projects/todoApp.jpg';
+
+// ─── NEW LOCAL IMPORTS (assets downloaded via download-assets.sh) ────────────
+import banyanlabs  from '../assets/icons/banyanlabs.png';
+import typescript  from '../assets/tech/typescript.png';
+import nextjs      from '../assets/tech/nextjs.png';
+import postgresql  from '../assets/tech/postgresql.png';
+import supabase    from '../assets/tech/supabase.png';
+import firebase    from '../assets/tech/firebase.png';
+import docker      from '../assets/tech/docker.png';
+import python      from '../assets/tech/python.png';
+import n8n         from '../assets/tech/n8n.png';
+import jonaProject     from '../assets/projects/jona.jpg';
+import compassProject  from '../assets/projects/compass.jpg';
+// ─────────────────────────────────────────────────────────────────────────────
 
 export interface NavLink {
   id: string;
@@ -75,31 +91,51 @@ export const navLinks: NavLink[] = [
   { id: 'contact', title: 'Contact' },
 ];
 
+// ─── SERVICES ────────────────────────────────────────────────────────────────
 const services: Service[] = [
-  { title: 'Frontend Developer', icon: frontend },
-  { title: 'Backend Developer', icon: backend },
-  { title: 'UI/UX Design', icon: ux },
-  { title: 'MERN stack developer', icon: mern },
-  { title: 'CIW jS specialist', icon: prototyping },
-  { title: 'AWS solutions architect', icon: aws },
+  { title: 'Full-Stack MERN / Next.js',       icon: frontend },
+  { title: 'Cloud & DevOps (AWS)',             icon: aws },
+  { title: 'AI & Automation',                 icon: backend },
+  { title: 'Database Architecture',           icon: mern },
+  { title: 'UI/UX & Accessible Design',       icon: ux },
+  { title: 'TypeScript & Quality Assurance',  icon: prototyping },
 ];
 
+// ─── TECHNOLOGIES (3D BALL ICONS) ────────────────────────────────────────────
 const technologies: Technology[] = [
-  { name: 'HTML 5', icon: html },
-  { name: 'CSS 3', icon: css },
-  { name: 'JavaScript', icon: javascript },
-  { name: 'Bootstrap', icon: bootstrap },
-  { name: 'React JS', icon: reactjs },
-  { name: 'Redux Toolkit', icon: redux },
-  { name: 'Tailwind CSS', icon: tailwind },
-  { name: 'Node JS', icon: nodejs },
-  { name: 'mui', icon: material },
-  { name: 'mongodb', icon: mongodb },
-  { name: 'git', icon: git },
-  { name: 'vite', icon: vite },
+  { name: 'TypeScript',     icon: typescript },
+  { name: 'React JS',       icon: reactjs },
+  { name: 'Next.js',        icon: nextjs },
+  { name: 'Node JS',        icon: nodejs },
+  { name: 'PostgreSQL',     icon: postgresql },
+  { name: 'MongoDB',        icon: mongodb },
+  { name: 'Supabase',       icon: supabase },
+  { name: 'Firebase',       icon: firebase },
+  { name: 'AWS',            icon: aws },
+  { name: 'Docker',         icon: docker },
+  { name: 'Tailwind CSS',   icon: tailwind },
+  { name: 'n8n Automation', icon: n8n },
+  { name: 'Python',         icon: python },
+  { name: 'Redux Toolkit',  icon: redux },
+  { name: 'Git',            icon: git },
 ];
 
+// ─── EXPERIENCE ──────────────────────────────────────────────────────────────
 const experiences: Experience[] = [
+  {
+    title: 'Full Stack Developer — JONA & COMPASS',
+    company_name: 'Banyan Labs (via Persevere)',
+    icon: banyanlabs,
+    iconBg: '#1A1A2E',
+    date: 'Oct 2025 - Present',
+  },
+  {
+    title: 'Full Stack MERN Web Dev Instructor Assistant',
+    company_name: 'Persevere Community (Cohorts 14 & 16 + Incarcerated Students)',
+    icon: persevere,
+    iconBg: '#0A74DA',
+    date: 'Jan 2025 - Present',
+  },
   {
     title: 'Full Stack MERN Developer',
     company_name: 'Persevere Community',
@@ -122,13 +158,6 @@ const experiences: Experience[] = [
     date: 'Jul 2024 - Present',
   },
   {
-    title: 'Full Stack MERN Web Development Instructor Assistant',
-    company_name: 'Persevere Community (Cohorts 14 & 16 + Incarcerated Students)',
-    icon: persevere,
-    iconBg: '#0A74DA',
-    date: 'Jan 2025 - Present',
-  },
-  {
     title: 'Certified Full Stack Developer',
     company_name: 'FreeCodeCamp',
     icon: freecodecamp,
@@ -137,67 +166,101 @@ const experiences: Experience[] = [
   },
 ];
 
+// ─── PROJECTS ────────────────────────────────────────────────────────────────
 const projects: Project[] = [
   {
     id: 'project-1',
-    name: 'create-murphy-backend',
-    description: '💻 Rapid backend scaffolding — Express + Mongoose in seconds.',
+    name: 'JONA — Job Oportunity and Next Step Action Workforce Intelligence',
+    description:
+      "AI-powered career platform built at Banyan Labs. Scores every job opportunity 0–100 against a participant's skills, resume, certifications, and career goals. Powering real employment outcomes for underserved communities.",
     tags: [
-      { name: 'react', color: 'blue-text-gradient' },
-      { name: 'mongodb', color: 'green-text-gradient' },
-      { name: 'express', color: 'pink-text-gradient' },
+      { name: 'next.js',    color: 'blue-text-gradient' },
+      { name: 'typescript', color: 'green-text-gradient' },
+      { name: 'AI / RAG',   color: 'pink-text-gradient' },
+    ],
+    image: jonaProject,
+    repo: '',
+    demo: 'https://jona.careers',
+  },
+  {
+    id: 'project-2',
+    name: 'NEXARA Banyan Labs — Agentic Onboarding Portal',
+    description:
+      "UI/UX optimization and dev contributions on Banyan Labs' production Onboarding Portal. Built on Next.js 16 + React 19 with Firebase, drag-and-drop workflows, PDF generation, and Zod-validated forms — handling OJT applications and participant referrals across staging and production environments.",
+    tags: [
+      { name: 'next.js 16',  color: 'blue-text-gradient' },
+      { name: 'firebase',    color: 'green-text-gradient' },
+      { name: 'typescript',  color: 'pink-text-gradient' },
+    ],
+    image: compassProject,
+    repo: 'https://github.com/Banyan-Labs/banyan-onboarding-portal',
+    demo: 'https://banyan-onboarding-portal--banyan-labs-training.us-east4.hosted.app/welcome',
+  },
+  {
+    id: 'project-3',
+    name: 'COMPASS — Transitional Housing OS',
+    description:
+      'Trauma-informed digital ecosystem for transitional housing programs. Mutual accountability, real-time coaching, and predictive risk alerts — built on radical transparency, not surveillance. Navigation, not control.',
+    tags: [
+      { name: 'next.js',    color: 'blue-text-gradient' },
+      { name: 'supabase',   color: 'green-text-gradient' },
+      { name: 'postgresql', color: 'pink-text-gradient' },
+    ],
+    image: compassProject,
+    repo: '',
+    demo: 'https://banyanlabs.io/products/compass',
+  },
+  {
+    id: 'project-4',
+    name: 'create-murphy-backend',
+    description:
+      '⚡ npm package for rapid backend scaffolding — Express + Mongoose production-ready structure in seconds. Built out of real frustration with repetitive setup.',
+    tags: [
+      { name: 'node.js',  color: 'blue-text-gradient' },
+      { name: 'express',  color: 'green-text-gradient' },
+      { name: 'mongodb',  color: 'pink-text-gradient' },
     ],
     image: npmCreateMurphyBackend,
     repo: 'https://github.com/randallmurphy/create-murphy-backend',
     demo: 'https://www.npmjs.com/package/create-murphy-backend',
   },
   {
-    id: 'project-2',
+    id: 'project-5',
     name: 'wealthMap',
-    description: 'cash flow budgeting app inc/expense asset/liab.',
+    description:
+      'Cash flow budgeting app tracking income, expenses, assets, and liabilities. Financial clarity for people who deserve it.',
     tags: [
-      { name: 'react', color: 'blue-text-gradient' },
-      { name: 'restapi', color: 'green-text-gradient' },
-      { name: 'scss', color: 'pink-text-gradient' },
+      { name: 'react',    color: 'blue-text-gradient' },
+      { name: 'rest api', color: 'green-text-gradient' },
+      { name: 'scss',     color: 'pink-text-gradient' },
     ],
     image: wealthMap,
     repo: 'https://github.com/randallmurphy/wealthMap',
-    demo: 'https://shaqdeff.github.io/Leaderboard/',
-  },
-  {
-    id: 'project-3',
-    name: 'perfect cleaning',
-    description: 'make a wish upon a star',
-    tags: [
-      { name: 'nextjs', color: 'blue-text-gradient' },
-      { name: 'supabase', color: 'green-text-gradient' },
-      { name: 'css', color: 'pink-text-gradient' },
-    ],
-    image: perfectClean,
-    repo: '',
     demo: '',
   },
   {
-    id: 'project-4',
+    id: 'project-6',
     name: 'TodoApp',
-    description: 'A stylish task app to organize your daily todos!',
+    description:
+      'A clean, stylish task manager for organizing daily work — built with Next.js and Supabase.',
     tags: [
-      { name: 'nextjs', color: 'blue-text-gradient' },
+      { name: 'next.js',  color: 'blue-text-gradient' },
       { name: 'supabase', color: 'green-text-gradient' },
-      { name: 'css', color: 'pink-text-gradient' },
+      { name: 'css',      color: 'pink-text-gradient' },
     ],
     image: todoApp,
     repo: 'https://github.com/randallmurphy/todoApp',
     demo: 'https://todo.randalmurphy.com/',
   },
   {
-    id: 'project-5',
+    id: 'project-7',
     name: 'Nyeusi Fest Site',
-    description: 'This is a demo concert website for a music festival called Nyeusi.',
+    description:
+      'Demo concert website for a music festival — immersive, animated, and built to feel alive.',
     tags: [
-      { name: 'nextjs', color: 'blue-text-gradient' },
-      { name: 'supabase', color: 'green-text-gradient' },
-      { name: 'css', color: 'pink-text-gradient' },
+      { name: 'react', color: 'blue-text-gradient' },
+      { name: 'css',   color: 'green-text-gradient' },
+      { name: 'vite',  color: 'pink-text-gradient' },
     ],
     image: nyeusi,
     repo: 'https://github.com/shaqdeff/Nyeusi-Fest-Site',

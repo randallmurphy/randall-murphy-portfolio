@@ -141,7 +141,7 @@ const Experience = () => {
               hover:bg-battleGray hover:text-eerieBlack
               transition-all duration-200 ease-out
               shadow-md hover:shadow-lg"
-              onClick={() => window.open('/Randall_Murphy_Resume.pdf', '_blank')}
+              onClick={() => window.open('/randall-murphy-resume.docx(1).pdf', '_blank')}
               onMouseEnter={() => setIconSrc(toSrc(downloadHover))}
               onMouseLeave={() => setIconSrc(toSrc(download))}>
               MY RESUME

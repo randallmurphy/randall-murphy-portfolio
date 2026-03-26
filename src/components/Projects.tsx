@@ -33,9 +33,8 @@ const ProjectCard = memo(({
   return (
     <motion.div
       variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
-      className={`relative ${
-        isActive ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
-      } flex items-center justify-center min-w-[170px]
+      className={`relative ${isActive ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
+        } flex items-center justify-center min-w-[170px]
       h-[420px] cursor-pointer card-shadow
       transition-all duration-500 ease-in-out`}
       onClick={() => handleClick(id)}>
@@ -143,7 +142,7 @@ const Projects = () => {
         <h2 className={styles.sectionHeadTextLight}>Projects.</h2>
       </motion.div>
 
-      <div className="w-full flex">
+      <div className="w-full flex justify-center">
         <motion.p
           variants={fadeIn('', '', 0.1, 1)}
           className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
