@@ -35,10 +35,21 @@ const config: Config = {
         burntOrange: '#C05621',
         rosewood: '#65000B',
         desertSand: '#EDC9AF',
+        // Neuro-Inclusive Neon Palette
+        pureBlack: '#000000',
+        neuroBlue: '#4A90E2',
+        warmCoral: '#FF7E67',
+        sageNeon: '#85E0A3',
+        electricLavender: '#B490E5',
       },
       boxShadow: {
         card: '0px 35px 120px -15px #1f1f1f',
         cardLight: '0px 19px 38px #eaeaec, 0px 15px 12px #eaeaec',
+        brutal: '8px 8px 0px rgba(255, 255, 255, 1)',
+        'brutal-neuro': '8px 8px 0px #4A90E2',
+        'brutal-coral': '8px 8px 0px #FF7E67',
+        'brutal-sage': '8px 8px 0px #85E0A3',
+        'brutal-lavender': '8px 8px 0px #B490E5',
       },
       screens: {
         xs: '450px',

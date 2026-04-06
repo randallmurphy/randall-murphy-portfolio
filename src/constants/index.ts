@@ -45,6 +45,7 @@ import python      from '../assets/tech/python.png';
 import n8n         from '../assets/tech/n8n.png';
 import jonaProject     from '../assets/projects/jona.jpg';
 import compassProject  from '../assets/projects/compass.jpg';
+import nexaraProject   from '../assets/projects/nexara.png';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface NavLink {
@@ -192,7 +193,7 @@ const projects: Project[] = [
       { name: 'firebase',    color: 'green-text-gradient' },
       { name: 'typescript',  color: 'pink-text-gradient' },
     ],
-    image: compassProject,
+    image: nexaraProject,
     repo: 'https://github.com/Banyan-Labs/banyan-onboarding-portal',
     demo: 'https://banyan-onboarding-portal--banyan-labs-training.us-east4.hosted.app/welcome',
   },
@@ -252,20 +253,20 @@ const projects: Project[] = [
     repo: 'https://github.com/randallmurphy/todoApp',
     demo: 'https://todo.randalmurphy.com/',
   },
-  {
-    id: 'project-7',
-    name: 'Nyeusi Fest Site',
-    description:
-      'Demo concert website for a music festival — immersive, animated, and built to feel alive.',
-    tags: [
-      { name: 'react', color: 'blue-text-gradient' },
-      { name: 'css',   color: 'green-text-gradient' },
-      { name: 'vite',  color: 'pink-text-gradient' },
-    ],
-    image: nyeusi,
-    repo: 'https://github.com/shaqdeff/Nyeusi-Fest-Site',
-    demo: 'https://shaqdeff.github.io/Nyeusi-Fest-Site/',
-  },
+  // {
+  //   id: 'project-7',
+  //   name: 'Nyeusi Fest Site',
+  //   description:
+  //     'Demo concert website for a music festival — immersive, animated, and built to feel alive.',
+  //   tags: [
+  //     { name: 'react', color: 'blue-text-gradient' },
+  //     { name: 'css',   color: 'green-text-gradient' },
+  //     { name: 'vite',  color: 'pink-text-gradient' },
+  //   ],
+  //   image: nyeusi,
+  //   repo: 'https://github.com/shaqdeff/Nyeusi-Fest-Site',
+  //   demo: 'https://shaqdeff.github.io/Nyeusi-Fest-Site/',
+  // },
 ];
 
 export { services, technologies, experiences, projects };

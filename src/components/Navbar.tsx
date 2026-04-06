@@ -1,69 +1,66 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
-import { styles } from '../styles';
-import { navLinks } from '../constants';
-import { close, menu, logo, logotext } from '../assets';
-import { toSrc } from '../utils/image';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { navLinks } from "../constants";
+import { close, menu } from "../assets";
+import { toSrc } from "../utils/image";
 
 const Navbar = () => {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = toggle ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.style.overflow = toggle ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [toggle]);
 
   return (
-    <nav
-      className={`${styles.paddingX} w-full flex items-center py-2 fixed
-      top-0 z-20 h-[70px] sm:h-[80px] transition-all duration-300
-      ${scrolled
-        ? 'bg-night/85 backdrop-blur-md border-b border-white/10 shadow-lg'
-        : 'bg-flashWhite sm:opacity-[0.97]'
-      }`}>
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
+    <div className="fixed top-4 left-0 w-full flex justify-center z-[110] px-4 pointer-events-none">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className={`flex items-center justify-between w-full max-w-5xl py-3 px-6 sm:px-10 rounded-3xl transition-all duration-500 overflow-hidden relative pointer-events-auto bg-pureBlack/60 backdrop-blur-3xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-electricLavender/40`}
+      >
+        {/* Animated Blob behind navbar content (always visible) */}
+        <motion.div 
+          animate={{ 
+            x: ["0%", "100%", "0%"],
+            scale: [1, 1.5, 1],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-50%] left-[-20%] w-[150px] h-[150px] bg-neuroBlue/20 rounded-full blur-[40px] -z-10"
+        />
+
         <Link
           href="/"
-          className="flex items-center gap-2"
+          className="flex items-center gap-3 z-10"
           onClick={() => {
-            setActive('');
+            setActive("");
             window.scrollTo(0, 0);
           }}>
-          <img
-            src={toSrc(logo)}
-            alt="logo"
-            className="sm:w-[50px] sm:h-[50px] w-[42px] h-[42px] object-contain"
-          />
-          <img
-            src={toSrc(logotext)}
-            alt="Randall Murphy"
-            className="sm:w-[90px] sm:h-[90px] w-[80px] h-[80px] -ml-[0.6rem] object-contain"
-          />
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-pureBlack font-bold text-xl font-mova">
+            RM
+          </div>
+          <span className="text-white text-[18px] font-bold font-poppins tracking-[2px] hidden sm:block">
+            IAMMurphy
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <ul className="list-none hidden sm:flex flex-row gap-14 mt-2">
+        <ul className="list-none hidden sm:flex flex-row gap-8 mt-1 z-10">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
               className={`${
                 active === nav.title
-                  ? scrolled ? 'text-timberWolf' : 'text-french'
-                  : scrolled ? 'text-taupe' : 'text-eerieBlack'
-              } hover:text-taupe text-[21px] font-medium font-mova
-                uppercase tracking-[3px] cursor-pointer nav-links
+                  ? "text-white"
+                  : "text-white/60"
+              } hover:text-white text-[16px] font-medium font-poppins
+                tracking-[1px] cursor-pointer nav-links
                 transition-colors duration-200`}
               onClick={() => setActive(nav.title)}>
               <a href={`#${nav.id}`}>{nav.title}</a>
@@ -72,55 +69,60 @@ const Navbar = () => {
         </ul>
 
         {/* Mobile menu toggle */}
-        <div className="sm:hidden flex items-center">
+        <div className="sm:hidden flex items-center z-10">
           <img
             src={toSrc(menu)}
             alt="menu"
-            className="w-[34px] h-[34px] object-contain cursor-pointer"
+            className="w-[28px] h-[28px] object-contain cursor-pointer filter brightness-0 invert"
             onClick={() => setToggle(true)}
           />
         </div>
-      </div>
+      </motion.nav>
 
       {/* Mobile full-screen menu */}
       <AnimatePresence>
         {toggle && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-            className="fixed inset-0 w-screen h-[100svh] bg-flashWhite z-50 flex flex-col p-6">
-            <div className="flex justify-end">
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            className="fixed inset-0 w-screen h-[100svh] bg-pureBlack/90 backdrop-blur-3xl z-[120] flex flex-col p-6 pointer-events-auto">
+            
+            <div className="flex justify-end p-4">
               <img
                 src={toSrc(close)}
                 alt="close"
-                className="w-[22px] h-[22px] object-contain cursor-pointer"
+                className="w-[28px] h-[28px] object-contain cursor-pointer filter brightness-0 invert"
                 onClick={() => setToggle(false)}
               />
             </div>
-            <ul className="list-none flex flex-col items-start justify-end mt-[10rem] -ml-[35px] gap-0">
-              {navLinks.map((nav) => (
-                <li
+            
+            <ul className="list-none flex flex-col items-center justify-center h-full gap-8">
+              {navLinks.map((nav, index) => (
+                <motion.li
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
                   id={nav.id}
                   key={nav.id}
                   className={`${
-                    active === nav.title ? 'text-french' : 'text-eerieBlack'
-                  } text-[88px] font-bold font-arenq
-                    uppercase tracking-[1px] cursor-pointer leading-tight`}
+                    active === nav.title ? "text-neuroBlue" : "text-white"
+                  } text-[48px] font-bold font-mova
+                    uppercase tracking-[2px] cursor-pointer leading-tight`}
                   onClick={() => {
                     setToggle(false);
                     setActive(nav.title);
                   }}>
                   <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </div>
   );
 };
 

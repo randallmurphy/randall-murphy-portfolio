@@ -1,115 +1,73 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { styles } from '../styles';
-import { shaq, bwmap, worldmap } from '../assets';
-import { toSrc } from '../utils/image';
+import { motion } from "framer-motion";
+import { styles } from "../styles";
+import { shaq } from "../assets";
+import { toSrc } from "../utils/image";
+import { CinematicSection } from "./CinematicSection";
 
 const Hero = () => {
   return (
-    <>
-      {/* Background maps */}
-      <div className="absolute top-0 left-0 z-0 h-[100svh] w-screen pointer-events-none">
-        <img
-          src={toSrc(bwmap)}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full sm:block hidden object-cover"
-        />
-      </div>
-      <div className="absolute top-0 left-0 z-0 h-[100svh] w-screen pointer-events-none">
-        <img
-          src={toSrc(worldmap)}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full sm:hidden block object-cover"
-        />
-      </div>
-
-      <section className="relative w-full h-[100svh] overflow-hidden sm:bg-hero bg-hero-mobile">
-
-        {/* Mobile: vertical dot + line decoration */}
-        <div className="absolute top-[150px] left-5 z-10 sm:hidden flex flex-col items-center">
-          <div className="w-5 h-5 rounded-full bg-[#0a0a0a]" />
-          <div className="w-1 h-40 bw-gradient" />
-        </div>
-
+    <CinematicSection id="hero" className="sm:mt-0 mt-16 pb-0">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between h-full relative z-10 gap-10">
+        
         {/* ── Text content ── */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
-          className={`
-            absolute z-10
-            top-[130px] xs:top-[140px] sm:top-[190px] lg:top-[155px] xl:top-[210px] 2xl:top-[240px]
-            left-6 sm:left-16
-            lg:left-[max(4rem,calc(50vw_-_38rem))]
-            w-[calc(100vw_-_3rem)] xs:w-[340px] sm:w-[460px] md:w-[500px] lg:w-[540px] xl:w-[600px]
-          `}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+          className="w-full md:w-1/2 flex flex-col items-start justify-center"
         >
-          <h1
-            className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
-            Hi, IAM{' '}
-            <br />
-            <span
-              className="sm:text-battleGray sm:text-[90px]
-              text-eerieBlack text-[50px] font-mova
-              font-extrabold uppercase">
+          <div className="flex gap-4 items-center mb-6">
+            <div className="w-16 h-1 bg-electricLavender" />
+            <h2 className="text-sageNeon uppercase tracking-widest font-bold text-sm">System Architect</h2>
+          </div>
+          
+          <h1 className="text-white font-poppins uppercase text-5xl sm:text-6xl lg:text-7xl leading-[1.1] mb-6 drop-shadow-md">
+            Hi, IAM <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neuroBlue to-electricLavender font-mova font-extrabold text-[70px] sm:text-[90px] lg:text-[110px] leading-[0.9]">
               RANDALL
             </span>
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
-            A results-driven Full Stack Developer specializing in backend
-            systems and DevOps, with deep expertise in the MERN stack. I build
-            scalable, maintainable, and high-performance web applications that
-            drive business growth and elevate user experiences.
+
+          <p className="mt-2 text-white/80 text-lg md:text-xl font-poppins max-w-[60ch] leading-relaxed">
+            A results-driven Full Stack Developer specializing in backend systems and DevOps, with deep expertise in the MERN stack. I build scalable, maintainable, and high-performance applications that drive business growth and elevate user experiences.
           </p>
         </motion.div>
 
         {/* ── Personal photo ── */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.1, delay: 0.3 }}
-          className="absolute bottom-0 z-10
-            right-0
-            sm:right-[1vw] md:right-[3vw] lg:right-[4vw] xl:right-[7vw] 2xl:right-[11vw]"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.2 }}
+          className="w-full md:w-1/2 flex justify-center md:justify-end items-end h-[50vh] md:h-[80vh] relative pt-10"
         >
           <img
             src={toSrc(shaq)}
             alt="Randall Murphy"
-            className="
-              h-[56vh] xs:h-[60vh] sm:h-[82vh] md:h-[76vh] lg:h-[88vh] xl:h-[92vh]
-              w-auto object-contain object-bottom
-              max-w-none
-            "
+            className="h-full w-auto object-contain object-bottom relative z-10 max-h-[85vh] drop-shadow-2xl mix-blend-screen"
           />
         </motion.div>
 
-        {/* ── Scroll indicator ── */}
-        <div
-          className="absolute xs:bottom-10 bottom-8 w-full
-          flex justify-center items-center z-10">
-          <a href="#about" aria-label="Scroll to about section">
-            <div
-              className="w-[35px] h-[64px] rounded-3xl border-4
-              border-french border-dim flex
-              justify-center items-start p-2
-              hover:border-taupe transition-colors duration-300">
-              <motion.div
-                animate={{ y: [0, 24, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: 'loop',
-                }}
-                className="w-3 h-3 rounded-full bg-taupe mb-1"
-              />
-            </div>
-          </a>
-        </div>
-      </section>
-    </>
+      </div>
+
+      {/* ── Scroll indicator ── */}
+      <div className="absolute bottom-8 w-full flex justify-center items-center z-20">
+        <a href="#about" aria-label="Scroll to about section">
+          <div className="w-[35px] h-[64px] rounded-3xl border border-white/20 flex justify-center items-start p-2 hover:border-electricLavender transition-colors duration-300 bg-pureBlack/50 backdrop-blur-md">
+            <motion.div
+              animate={{ y: [0, 24, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className="w-3 h-3 rounded-full bg-electricLavender mb-1 shadow-[0_0_10px_#b490e5]"
+            />
+          </div>
+        </a>
+      </div>
+    </CinematicSection>
   );
 };
 

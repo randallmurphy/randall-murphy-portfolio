@@ -1,69 +1,81 @@
-'use client';
+"use client";
 
-import { memo } from 'react';
-import { motion } from 'framer-motion';
-import { styles } from '../styles';
-import { services, type Service } from '../constants';
-import { fadeIn, textVariant } from '../utils/motion';
-import { SectionWrapper } from '../hoc';
-import { toSrc } from '../utils/image';
+import { memo, useState } from "react";
+import { motion } from "framer-motion";
+import Spline from "@splinetool/react-spline";
+import { styles } from "../styles";
+import { services, type Service } from "../constants";
+import { fadeIn } from "../utils/motion";
+import { CinematicSection } from "./CinematicSection";
+import { toSrc } from "../utils/image";
 
 interface ServiceCardProps extends Service {
   index: number;
 }
 
-const ServiceCard = memo(({ index, title, icon }: ServiceCardProps) => (
-  <motion.div
-    variants={fadeIn('right', 'spring', 0.5 * index, 0.75)}
-    className="xs:w-[250px] w-full card-gradient p-[1px] rounded-[20px] shadow-card">
-    <div
-      options={{ max: 45, scale: 1, speed: 450 }}
-      className="bg-jetLight rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col">
-      <img
-        src={toSrc(icon)}
-        alt={title}
-        className="w-16 h-16 object-contain"
-      />
-      <h3 className="text-taupe text-[18px] font-bold text-center">
+const ServiceCard = memo(({ index, title, icon }: ServiceCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      variants={fadeIn("up", "spring", 0.5 * index, 0.75)}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="w-full relative group min-h-[320px] rounded-2xl overflow-hidden brutalist-tile liquid-glass shadow-brutal hover:shadow-brutal-neuro hover:border-neuroBlue transition-all duration-300"
+    >
+    {/* 3D Spline Backdrop (Neural Pop) */}
+    <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none scale-150 group-hover:scale-100">
+      {/* Fallback geometric 3D shape from Spline community mounted lazily */}
+      {isHovered && <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />}
+    </div>
+
+    {/* Content */}
+    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 bg-pureBlack/40 group-hover:bg-transparent transition-colors duration-500">
+      <div className="w-20 h-20 mb-6 rounded-full bg-white/5 border border-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+        <img
+          src={toSrc(icon)}
+          alt={title}
+          className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+        />
+      </div>
+      <h3 className="text-white text-xl font-bold text-center font-beckman tracking-wider">
         {title}
       </h3>
     </div>
   </motion.div>
-));
-ServiceCard.displayName = 'ServiceCard';
+  );
+});
+ServiceCard.displayName = "ServiceCard";
 
 const About = () => {
   return (
-    <div>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
+    <CinematicSection id="about">
+      <motion.div className="w-full flex flex-col items-center text-center">
+        <p className="text-neuroBlue uppercase tracking-wider text-sm font-bold mb-2">The Frequency</p>
+        <h2 className="text-5xl md:text-7xl font-mova text-white mb-8">Neural Architecture.</h2>
       </motion.div>
 
       <motion.p
-        variants={fadeIn('', '', 0.1, 1)}
-        className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
+        className="text-white/70 text-lg md:text-xl font-poppins max-w-[60ch] leading-relaxed text-center mx-auto"
+      >
         Full Stack Engineer and mission-driven technologist building production
-        AI products at{' '}
-        <span className="text-eerieBlack font-semibold">Banyan Labs</span> and{' '}
-        <span className="text-eerieBlack font-semibold">Persevere</span> — a
+        AI products at <span className="text-white font-bold">Banyan Labs</span> and{" "}
+        <span className="text-white font-bold">Persevere</span> — a
         national non-profit transforming lives through technology careers.
-        Currently shipping{' '}
-        <span className="text-eerieBlack font-semibold">JONA</span> (AI
-        workforce intelligence) and{' '}
-        <span className="text-eerieBlack font-semibold">COMPASS</span>{' '}
+        Currently shipping <span className="text-sageNeon font-bold">JONA</span>{" "}
+        (AI workforce intelligence) and <span className="text-warmCoral font-bold">COMPASS</span>{" "}
         (trauma-informed housing platform). U.S. Coast Guard veteran. Certified
         Peer Recovery Specialist. Instructor to developers building futures from
         the inside out.
       </motion.p>
 
-      <div className="mt-20 flex flex-wrap gap-10">
+      <div className="w-full pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}
       </div>
-    </div>
+    </CinematicSection>
   );
 };
 
-export default SectionWrapper(About, 'about');
+export default About;

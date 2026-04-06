@@ -29,7 +29,6 @@ const Ball = ({ imgUrl }: { imgUrl: string }) => {
         <Decal
           position={[0, 0, 1]}
           rotation={[2 * Math.PI, 0, 6.25]}
-          flatShading
           map={decal}
         />
       </mesh>

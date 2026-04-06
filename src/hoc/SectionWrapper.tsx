@@ -2,7 +2,6 @@
 
 import { type ComponentType } from 'react';
 import { motion } from 'framer-motion';
-import { styles } from '../styles';
 import { staggerContainer } from '../utils/motion';
 
 const SectionWrapper = <T extends object>(
@@ -16,11 +15,20 @@ const SectionWrapper = <T extends object>(
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
-        className="section-padding max-w-7xl mx-auto relative z-0 w-full">
-        <span className="hash-span" id={idName}>
-          &nbsp;
-        </span>
-        <Component {...props} />
+        className="w-full relative z-0">
+        <div
+          className="max-w-7xl mx-auto relative"
+          style={{
+            paddingLeft: 'clamp(1.5rem, 8vw, 6rem)',
+            paddingRight: 'clamp(1.5rem, 8vw, 6rem)',
+            paddingTop: '4rem',
+            paddingBottom: '4rem',
+          }}>
+          <span className="hash-span" id={idName}>
+            &nbsp;
+          </span>
+          <Component {...props} />
+        </div>
       </motion.section>
     );
   }

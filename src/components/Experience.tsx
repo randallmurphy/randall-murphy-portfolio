@@ -1,161 +1,98 @@
-'use client';
+"use client";
 
-import { useState, memo } from 'react';
+import React from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
-} from 'react-vertical-timeline-component';
-import { motion } from 'framer-motion';
-import 'react-vertical-timeline-component/style.min.css';
-import { styles } from '../styles';
-import { experiences, type Experience as ExperienceType } from '../constants';
-import { SectionWrapper } from '../hoc';
-import { download, downloadHover, resume } from '../assets';
-import { textVariant } from '../utils/motion';
-import { toSrc } from '../utils/image';
+} from "react-vertical-timeline-component";
+import { motion } from "framer-motion";
+import "react-vertical-timeline-component/style.min.css";
+import { experiences } from "../constants";
+import { CinematicSection } from "./CinematicSection";
+import { toSrc } from "../utils/image";
 
-interface ExperienceCardProps {
-  experience: ExperienceType;
-}
+// A Custom styles override injected cleanly here for brutalist styles within the external component
+const globalTimelineOverrides = `
+  .vertical-timeline::before {
+    background: rgba(180, 144, 229, 0.2) !important;
+  }
+`;
 
-const ExperienceCard = memo(({ experience }: ExperienceCardProps) => (
-  <VerticalTimelineElement
-    contentStyle={{
-      background: 'rgba(234, 234, 236, 0.82)',
-      backdropFilter: 'blur(14px)',
-      WebkitBackdropFilter: 'blur(14px)',
-      color: '#292929',
-      border: '1px solid rgba(255,255,255,0.55)',
-      borderRadius: '20px',
-      boxShadow: `
-        0 12px 40px rgba(0,0,0,0.14),
-        inset 0 1px 0 rgba(255,255,255,0.7),
-        0 0 0 1px rgba(0,0,0,0.04)
-      `,
-      padding: '1.5rem 2rem',
-    }}
-    contentArrowStyle={{
-      borderRight: '7px solid rgba(234,234,236,0.82)',
-    }}
-    date={
-      <h3 className="text-dim text-[16px] sm:text-[18px] font-bold font-beckman px-1">
-        {experience.date}
-      </h3>
-    }
-    iconStyle={{
-      background: experience.iconBg,
-      boxShadow: `
-        0 0 0 4px rgba(255,255,255,0.35),
-        0 4px 20px rgba(0,0,0,0.25),
-        0 0 24px rgba(255,255,255,0.08)
-      `,
-    }}
-    icon={
-      <div className="flex justify-center items-center w-full h-full">
-        <img
-          src={toSrc(experience.icon)}
-          alt={experience.company_name}
-          className="w-[60%] h-[60%] object-contain"
-          loading="lazy"
-        />
-      </div>
-    }>
-    <div>
-      <h3 className="text-jetLight text-[20px] sm:text-[24px] font-bold font-beckman tracking-[1.5px] leading-snug">
-        {experience.title}
-      </h3>
-      <p
-        className="text-taupe text-[18px] sm:text-[20px] font-semibold font-overcameBold tracking-[1px] mt-1"
-        style={{ margin: '4px 0 0' }}>
-        {experience.company_name}
-      </p>
-    </div>
-  </VerticalTimelineElement>
-));
-ExperienceCard.displayName = 'ExperienceCard';
-
-const Experience = () => {
-  const [iconSrc, setIconSrc] = useState<string>(toSrc(download));
-
+const ExperienceCard = ({ experience }: { experience: any }) => {
   return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} sm:pl-16 pl-[2rem]`}>
-          What I&apos;ve done so far
+    <VerticalTimelineElement
+      contentStyle={{
+        background: "rgba(0, 0, 0, 0.6)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        boxShadow: "0 0 30px rgba(0, 0, 0, 0.5)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        color: "#fff",
+        borderRadius: "24px",
+      }}
+      contentArrowStyle={{ borderRight: "7px solid rgba(255, 255, 255, 0.1)" }}
+      date={experience.date}
+      iconStyle={{ 
+        background: "#0a0a0a", 
+        border: "1px solid rgba(255,255,255,0.2)",
+        boxShadow: "0 0 20px rgba(180, 144, 229, 0.2)"
+      }}
+      icon={
+        <div className='flex justify-center items-center w-full h-full'>
+          <img
+            src={toSrc(experience.icon)}
+            alt={experience.company_name}
+            className='w-[60%] h-[60%] object-contain drop-shadow-md'
+          />
+        </div>
+      }
+    >
+      <div>
+        <h3 className='text-white text-3xl font-bold font-mova drop-shadow-md'>{experience.title}</h3>
+        <p
+          className='text-sageNeon text-lg font-semibold font-poppins m-0 tracking-wider'
+        >
+          {experience.company_name}
         </p>
-        <h2 className={`${styles.sectionHeadText} sm:pl-16 pl-[2rem]`}>
-          Work Experience.
-        </h2>
-      </motion.div>
-
-      <div className="mt-16 sm:mt-20 flex flex-col">
-        <VerticalTimeline className="vertical-timeline-custom-line" animate>
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} />
-          ))}
-
-          {/* Resume download card */}
-          <VerticalTimelineElement
-            contentStyle={{
-              background: 'rgba(234, 234, 236, 0.82)',
-              backdropFilter: 'blur(14px)',
-              WebkitBackdropFilter: 'blur(14px)',
-              color: '#292929',
-              border: '1px solid rgba(255,255,255,0.55)',
-              borderRadius: '20px',
-              boxShadow: `
-                0 12px 40px rgba(0,0,0,0.14),
-                inset 0 1px 0 rgba(255,255,255,0.7)
-              `,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '1.5rem 2rem',
-            }}
-            contentArrowStyle={{
-              borderRight: '7px solid rgba(234,234,236,0.82)',
-            }}
-            iconStyle={{
-              background: '#333333',
-              boxShadow: `
-                0 0 0 4px rgba(255,255,255,0.25),
-                0 4px 20px rgba(0,0,0,0.3)
-              `,
-            }}
-            icon={
-              <div className="flex justify-center items-center w-full h-full">
-                <img
-                  src={toSrc(resume)}
-                  alt="resume"
-                  className="w-[45%] h-[45%] object-contain"
-                  loading="lazy"
-                />
-              </div>
-            }>
-            <button
-              className="live-demo flex justify-between items-center gap-2
-              sm:text-[18px] text-[14px] text-timberWolf
-              font-bold font-beckman py-4 px-4
-              whitespace-nowrap sm:w-[148px] sm:h-[54px]
-              w-[130px] h-[46px] rounded-[12px] bg-jetLight
-              hover:bg-battleGray hover:text-eerieBlack
-              transition-all duration-200 ease-out
-              shadow-md hover:shadow-lg"
-              onClick={() => window.open('/randall-murphy-resume.docx(1).pdf', '_blank')}
-              onMouseEnter={() => setIconSrc(toSrc(downloadHover))}
-              onMouseLeave={() => setIconSrc(toSrc(download))}>
-              MY RESUME
-              <img
-                src={iconSrc}
-                alt="download"
-                className="sm:w-[26px] sm:h-[26px] w-[22px] h-[22px] object-contain"
-              />
-            </button>
-          </VerticalTimelineElement>
-        </VerticalTimeline>
       </div>
-    </>
+
+      <ul className='mt-8 list-none space-y-4'>
+        {experience.points?.map((point: string, index: number) => (
+          <li
+            key={`experience-point-${index}`}
+            className='text-white/70 text-sm md:text-base font-poppins leading-relaxed flex items-start gap-4'
+          >
+            <span className="text-electricLavender mt-1 leading-none text-xl">▹</span>
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </VerticalTimelineElement>
   );
 };
 
-export default SectionWrapper(Experience, 'work');
+export default function Experience() {
+  return (
+    <CinematicSection id="experience" className="py-20 min-h-screen relative border-white/5 border-t">
+      <style>{globalTimelineOverrides}</style>
+      
+      <div className="w-full text-center flex flex-col items-center mb-20 pointer-events-none">
+        <p className="text-sageNeon uppercase tracking-widest text-sm font-bold mb-4 bg-sageNeon/10 px-4 py-1 rounded-full border border-sageNeon/20">System Logs</p>
+        <h2 className='text-5xl md:text-7xl font-mova text-center tracking-widest text-white drop-shadow-md'>
+          Career Timeline.
+        </h2>
+      </div>
+
+      <div className='w-full mt-10 flex flex-col'>
+        <VerticalTimeline animate={true} lineColor="rgba(180, 144, 229, 0.2)">
+          {experiences.map((experience: any, index: number) => (
+            <ExperienceCard
+              key={`experience-${index}`}
+              experience={experience}
+            />
+          ))}
+        </VerticalTimeline>
+      </div>
+    </CinematicSection>
+  );
+}

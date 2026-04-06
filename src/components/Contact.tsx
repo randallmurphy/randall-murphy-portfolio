@@ -4,11 +4,10 @@ import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { toast } from 'sonner';
-import { styles } from '../styles';
-import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 import { send, sendHover } from '../assets';
 import { toSrc } from '../utils/image';
+import { CinematicSection } from './CinematicSection';
 
 interface FormState {
   name: string;
@@ -52,7 +51,8 @@ const Contact = () => {
         )
         .then(() => {
           setLoading(false);
-          toast.success('Message sent! I\'ll get back to you soon.', {
+          if (typeof window !== "undefined" && window.navigator && window.navigator.vibrate) window.navigator.vibrate([10, 30, 10]);
+          toast.success('Transmission successful. Awaiting neurological response.', {
             duration: 5000,
           });
           setForm(EMPTY_FORM);
@@ -60,7 +60,8 @@ const Contact = () => {
         .catch((error: unknown) => {
           setLoading(false);
           console.error(error);
-          toast.error('Something went wrong. Please try again.', {
+          if (typeof window !== "undefined" && window.navigator && window.navigator.vibrate) window.navigator.vibrate([50, 50, 50]);
+          toast.error('Signal degraded. The grid is rejecting our packet.', {
             duration: 5000,
           });
         });
@@ -69,18 +70,22 @@ const Contact = () => {
   );
 
   return (
-    <div className="flex justify-center overflow-hidden">
+    <CinematicSection id="contact" className="min-h-[80vh] flex justify-center items-center py-20">
       <motion.div
         variants={slideIn('left', 'tween', 0.2, 0.8)}
-        className="w-full max-w-2xl contact-glass rounded-2xl p-8 sm:p-10">
+        className="w-full max-w-3xl brutalist-tile liquid-glass rounded-3xl p-10 sm:p-14 border border-electricLavender/30 shadow-[0_0_40px_rgba(180,144,229,0.15)] mx-auto flex justify-center"
+      >
+        <div className="w-full flex justify-center flex-col items-center">
+          <div className="w-full text-center mb-8">
+            <p className="text-electricLavender uppercase tracking-wider text-sm font-bold mb-2">Transmission Link</p>
+            <h3 className="text-5xl md:text-7xl font-mova text-white mb-2">Contact.</h3>
+          </div>
 
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
-
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-8 sm:mt-10 flex flex-col gap-5 font-poppins">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="w-full mt-4 flex flex-col gap-6 font-poppins"
+          >
 
           <label className="flex flex-col gap-3">
             <span className="text-timberWolf font-medium text-[15px]">Your Name</span>
@@ -89,7 +94,7 @@ const Contact = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="What's your name?"
+              placeholder="Identify yourself..."
               required
               className="contact-input"
             />
@@ -102,7 +107,7 @@ const Contact = () => {
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="What's your email?"
+              placeholder="Direct neural link (email)?"
               required
               className="contact-input"
             />
@@ -115,37 +120,34 @@ const Contact = () => {
               name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder="What's your message?"
+              placeholder="Broadcast your signal..."
               required
               className="contact-input resize-none"
             />
           </label>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="live-demo flex justify-center items-center
-            sm:gap-4 gap-3 sm:text-[20px] text-[16px] text-timberWolf
-            font-bold font-beckman py-4 mt-2
-            whitespace-nowrap sm:w-[130px] sm:h-[50px]
-            w-[110px] h-[46px] rounded-[12px]
-            contact-btn-submit
-            hover:bg-battleGray hover:text-eerieBlack
-            transition-all duration-200 ease-out
-            disabled:opacity-50 disabled:cursor-not-allowed"
-            onMouseEnter={() => setSendIcon(toSrc(sendHover))}
-            onMouseLeave={() => setSendIcon(toSrc(send))}>
-            {loading ? 'Sending…' : 'Send'}
-            <img
-              src={sendIcon}
-              alt="send"
-              className="sm:w-[24px] sm:h-[24px] w-[20px] h-[20px] object-contain"
-            />
-          </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex justify-center items-center mt-6
+              gap-3 sm:text-[18px] text-[16px] text-pureBlack bg-white
+              font-bold font-beckman py-4 px-8 rounded-xl items-center self-center
+              hover:bg-electricLavender hover:text-white transition-all duration-300 shadow-brutal hover:shadow-brutal-lavender border border-white
+              disabled:opacity-50 disabled:cursor-not-allowed"
+              onMouseEnter={() => setSendIcon(toSrc(sendHover))}
+              onMouseLeave={() => setSendIcon(toSrc(send))}>
+              {loading ? 'Transmitting…' : 'Initialize Sequence'}
+              <img
+                src={sendIcon}
+                alt="send"
+                className="sm:w-[24px] sm:h-[24px] w-[20px] h-[20px] object-contain filter invert opacity-80"
+              />
+            </button>
         </form>
+        </div>
       </motion.div>
-    </div>
+    </CinematicSection>
   );
 };
 
-export default SectionWrapper(Contact, 'contact');
+export default Contact;
