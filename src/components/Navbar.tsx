@@ -1,127 +1,96 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { navLinks } from "../constants";
 import { close, menu } from "../assets";
 import { toSrc } from "../utils/image";
 
-const Navbar = () => {
+const Navbar = ({ inline }: { inline?: boolean }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = toggle ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [toggle]);
 
   return (
-    <div className="fixed top-4 left-0 w-full flex justify-center z-[110] px-4 pointer-events-none">
+    <div className={`${inline ? 'absolute top-4 left-4' : 'fixed top-4 left-4'} z-[110] pointer-events-none flex flex-col gap-4`}>
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`flex items-center justify-between w-full max-w-5xl py-3 px-6 sm:px-10 rounded-3xl transition-all duration-500 overflow-hidden relative pointer-events-auto bg-pureBlack/60 backdrop-blur-3xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-electricLavender/40`}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        className="pointer-events-auto relative flex w-full max-w-[20rem] flex-col gap-3 overflow-visible rounded-[1.25rem] border border-white/15 bg-void/78 px-4 py-4 mb-6 shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-[20px]"
       >
-        {/* Animated Blob behind navbar content (always visible) */}
-        <motion.div 
-          animate={{ 
-            x: ["0%", "100%", "0%"],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-50%] left-[-20%] w-[150px] h-[150px] bg-neuroBlue/20 rounded-full blur-[40px] -z-10"
-        />
-
-        <Link
-          href="/"
-          className="flex items-center gap-3 z-10"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}>
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-pureBlack font-bold text-xl font-mova">
-            RM
-          </div>
-          <span className="text-white text-[18px] font-bold font-poppins tracking-[2px] hidden sm:block">
-            IAMMurphy
-          </span>
-        </Link>
-
-        {/* Desktop nav */}
-        <ul className="list-none hidden sm:flex flex-row gap-8 mt-1 z-10">
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title
-                  ? "text-white"
-                  : "text-white/60"
-              } hover:text-white text-[16px] font-medium font-poppins
-                tracking-[1px] cursor-pointer nav-links
-                transition-colors duration-200`}
-              onClick={() => setActive(nav.title)}>
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile menu toggle */}
-        <div className="sm:hidden flex items-center z-10">
-          <img
-            src={toSrc(menu)}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain cursor-pointer filter brightness-0 invert"
-            onClick={() => setToggle(true)}
-          />
-        </div>
-      </motion.nav>
-
-      {/* Mobile full-screen menu */}
-      <AnimatePresence>
-        {toggle && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="fixed inset-0 w-screen h-[100svh] bg-pureBlack/90 backdrop-blur-3xl z-[120] flex flex-col p-6 pointer-events-auto">
-            
-            <div className="flex justify-end p-4">
-              <img
-                src={toSrc(close)}
-                alt="close"
-                className="w-[28px] h-[28px] object-contain cursor-pointer filter brightness-0 invert"
-                onClick={() => setToggle(false)}
-              />
+        <div className="flex flex-col gap-2">
+          <Link
+            href="/"
+            className="z-10 flex items-center gap-3"
+            onClick={() => {
+              setActive("");
+              window.scrollTo(0, 0);
+            }}
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-electric via-violet to-mint text-sm font-semibold uppercase tracking-[0.28em] text-white shadow-[0_0_24px_rgba(99,136,255,0.24)]">
+              RM
             </div>
-            
-            <ul className="list-none flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((nav, index) => (
-                <motion.li
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  id={nav.id}
-                  key={nav.id}
-                  className={`${
-                    active === nav.title ? "text-neuroBlue" : "text-white"
-                  } text-[48px] font-bold font-mova
-                    uppercase tracking-[2px] cursor-pointer leading-tight`}
-                  onClick={() => {
-                    setToggle(false);
-                    setActive(nav.title);
-                  }}>
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <div className="flex flex-col leading-none">
+              <span className="text-[0.82rem] font-semibold uppercase tracking-[0.32em] text-white/90">
+                Randall Murphy
+              </span>
+              <span className="mt-1 text-[0.68rem] uppercase tracking-[0.26em] text-mint/80">
+                Full Stack Engineer
+              </span>
+            </div>
+          </Link>
+
+          {/* hamburger removed from inside nav; rendered below so it sits outside and under the logo block */}
+        </div>
+
+        <AnimatePresence>
+          {toggle && (
+              <motion.div
+                key="mobile-menu"
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                transition={{ type: "spring", stiffness: 220, damping: 24 }}
+                className="absolute left-0 top-[calc(100%+1.5rem)] z-20 flex w-max min-w-[12rem] flex-col justify-center gap-4 rounded-[1.25rem] border border-white/15 bg-void/95 px-6 py-6 min-h-[8rem] shadow-[0_24px_50px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
+              >
+                <nav className="flex flex-1 flex-col items-center justify-center gap-2 text-center">
+                  {navLinks.map((nav) => (
+                    <a
+                      key={nav.id}
+                      href={`#${nav.id}`}
+                      onClick={() => {
+                        setToggle(false);
+                        setActive(nav.title);
+                      }}
+                      className={`block text-[1rem] w-full text-center font-semibold uppercase tracking-[0.3em] transition ${active === nav.title ? "text-white" : "text-white/65 hover:text-white"}`}
+                    >
+                      {nav.title}
+                    </a>
+                  ))}
+                </nav>
+              </motion.div>
+            )}
+        </AnimatePresence>
+      </motion.nav>
+      {/* Hamburger button placed outside and below the navbar block so it sits independently on the hero */}
+      <div className="pointer-events-auto ml-[10px]">
+        <button
+          type="button"
+          onClick={() => setToggle((s) => !s)}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-[0.9rem] border border-white/15 bg-white/10 text-white transition hover:bg-white/15"
+          aria-label={toggle ? "Close navigation" : "Open navigation"}
+        >
+          <img src={toSrc(toggle ? close : menu)} alt={toggle ? "close" : "menu"} className="h-5 w-5 object-contain brightness-0 invert" />
+        </button>
+      </div>
     </div>
   );
 };

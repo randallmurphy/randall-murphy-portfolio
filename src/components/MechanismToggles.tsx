@@ -4,7 +4,7 @@ import React from "react";
 import { useMechanism } from "./MechanismProvider";
 import { motion } from "framer-motion";
 
-export const MechanismToggles = () => {
+export const MechanismToggles = ({ inline }: { inline?: boolean }) => {
   const { density, setDensity, reducedMotion, setReducedMotion, bentoMode, setBentoMode } = useMechanism();
 
   // Tactile feedback on click
@@ -18,7 +18,7 @@ export const MechanismToggles = () => {
     <motion.div 
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed top-24 right-4 z-[100] flex flex-col gap-3 liquid-glass p-3 rounded-2xl"
+      className={`${inline ? 'absolute top-4 right-4' : 'fixed top-4 right-4'} z-[130] flex flex-col gap-3 liquid-glass p-3 rounded-2xl`}
     >
       {/* Density Toggle */}
       <div className="flex flex-col gap-1">

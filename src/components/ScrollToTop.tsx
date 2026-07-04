@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
@@ -23,7 +24,10 @@ const ScrollToTop = () => {
           transition={{ type: 'spring', stiffness: 380, damping: 28 }}
           whileHover={{ scale: 1.12 }}
           whileTap={{ scale: 0.92 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            toast.success('Signal refreshing...', { description: 'Re-initializing neural pathways.' });
+          }}
           className="fixed bottom-6 right-6 z-50
             w-12 h-12 sm:w-14 sm:h-14 rounded-full
             flex items-center justify-center cursor-pointer

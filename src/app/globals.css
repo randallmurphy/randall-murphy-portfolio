@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -37,12 +35,22 @@
   --color-rosewood: #65000b;
   --color-desertSand: #edc9af;
 
-  /* Neuro-Inclusive Neon Palette */
+  /* Neuro-Inclusive Neon Palette (retuned to Liquid Brutalism hues) */
   --color-pureBlack: #000000;
-  --color-neuroBlue: #4a90e2;
-  --color-warmCoral: #ff7e67;
-  --color-sageNeon: #85e0a3;
-  --color-electricLavender: #b490e5;
+  --color-neuroBlue: #6388ff;
+  --color-warmCoral: #ff7e67; /* legacy/off-palette — kept for any existing alert/warning usage, avoid for new work */
+  --color-sageNeon: #78ffc8;
+  --color-electricLavender: #aa8cff;
+
+  /* ── Liquid Brutalism palette (canonical) ──
+     Use these for all new components/text so everything shares one source of truth. */
+  --color-void: #08080f;        /* deepest bg */
+  --color-ink: #0f0e1a;         /* card / raised surface bg */
+  --color-deepIndigo: #231e5a;  /* shadow tone, section transitions */
+  --color-electric: #6388ff;    /* primary accent — links, icons, primary CTAs */
+  --color-violet: #aa8cff;      /* secondary accent — gradient midpoint */
+  --color-mint: #78ffc8;        /* tertiary accent — eyebrows, tags, success/hover */
+  --color-mintBright: #dcffeb;  /* highlight glow, use sparingly */
 
   /* ── Font Families ── */
   --font-arenq: 'Arenq', sans-serif;
@@ -56,10 +64,13 @@
   --shadow-card: 0px 35px 120px -15px #1f1f1f;
   --shadow-cardLight: 0px 19px 38px #eaeaec, 0px 15px 12px #eaeaec;
   --shadow-brutal: 8px 8px 0px rgba(255, 255, 255, 1);
-  --shadow-brutal-neuro: 8px 8px 0px #4a90e2;
+  --shadow-brutal-neuro: 8px 8px 0px #6388ff;
   --shadow-brutal-coral: 8px 8px 0px #ff7e67;
-  --shadow-brutal-sage: 8px 8px 0px #85e0a3;
-  --shadow-brutal-lavender: 8px 8px 0px #b490e5;
+  --shadow-brutal-sage: 8px 8px 0px #78ffc8;
+  --shadow-brutal-lavender: 8px 8px 0px #aa8cff;
+  --shadow-brutal-mint: 8px 8px 0px #78ffc8;
+  --shadow-brutal-electric: 8px 8px 0px #6388ff;
+  --shadow-brutal-violet: 8px 8px 0px #aa8cff;
 
   /* ── Breakpoints ── */
   --breakpoint-xxs: 350px;
@@ -73,20 +84,23 @@
   --breakpoint-3xl: 1800px;
 }
 
-/* ── Custom background image utilities ── */
+/* ── Custom background image utilities (Liquid Brutalism) ──
+   Previously these mixed in the light template's flashWhite tones,
+   which fought with the dark hero. Now everything stays in the
+   void → deepIndigo → electric/mint family. */
 @utility bg-about {
   background-image: linear-gradient(
     165deg,
-    rgba(244, 244, 246, 1) 100%,
-    rgba(122, 122, 122, 1) 100%
+    rgba(8, 8, 15, 0.97) 0%,
+    rgba(35, 30, 90, 0.85) 100%
   );
 }
 
 @utility bg-tech {
   background-image: linear-gradient(
       165deg,
-      rgba(20, 20, 20, 0.8) 100%,
-      rgba(109, 109, 116, 0.8) 100%
+      rgba(8, 8, 15, 0.88) 0%,
+      rgba(35, 30, 90, 0.8) 100%
     ),
     url('/backgrounds/nairobi.png');
 }
@@ -94,8 +108,8 @@
 @utility bg-experience {
   background-image: linear-gradient(
       135deg,
-      rgba(244, 244, 246, 0.5) 60%,
-      rgba(10, 10, 10, 0.2) 100%
+      rgba(8, 8, 15, 0.85) 55%,
+      rgba(99, 136, 255, 0.18) 100%
     ),
     url('/backgrounds/white-abstract.png');
 }
@@ -103,25 +117,72 @@
 @utility bg-experienceLight {
   background-image: linear-gradient(
     137deg,
-    rgba(244, 244, 246, 0.5) 60%,
-    rgba(10, 10, 10, 0.9) 60%
+    rgba(35, 30, 90, 0.55) 55%,
+    rgba(8, 8, 15, 0.92) 100%
   );
 }
 
 @utility bg-hero {
-  background-image: linear-gradient(
-    135deg,
-    rgba(244, 244, 246, 0.8) 60%,
-    rgba(10, 10, 10, 0.95) 60%
-  );
+  background-image: radial-gradient(
+      circle at 75% 30%,
+      rgba(99, 136, 255, 0.22) 0%,
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(8, 8, 15, 0.98) 45%,
+      rgba(35, 30, 90, 0.75) 100%
+    );
 }
 
 @utility bg-hero-mobile {
   background-image: linear-gradient(
-    137deg,
-    rgba(244, 244, 246, 0.8) 60%,
-    rgba(10, 10, 10, 1) 60%
+    160deg,
+    rgba(8, 8, 15, 0.98) 45%,
+    rgba(35, 30, 90, 0.85) 100%
   );
+}
+
+/* ── Text gradient utilities ──
+   Primary headline treatment (matches the "RANDALL" hero text) plus
+   the three tag-gradient classes referenced by constants.ts projects[].tags */
+@utility text-gradient {
+  background: linear-gradient(135deg, #6388ff 0%, #aa8cff 60%, #78ffc8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.blue-text-gradient {
+  background: linear-gradient(90deg, #6388ff 0%, #8fb3ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.green-text-gradient {
+  background: linear-gradient(90deg, #78ffc8 0%, #dcffeb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pink-text-gradient {
+  /* re-themed to violet to stay on-palette; class name kept as-is
+     so existing project tag data in constants.ts doesn't need to change */
+  background: linear-gradient(90deg, #aa8cff 0%, #d5c4ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ── Eyebrow label (the "SYSTEM ARCHITECT" style small caps tag) ── */
+.eyebrow-label {
+  color: var(--color-mint);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  font-weight: 600;
 }
 
 /* ── Custom font faces ── */
@@ -157,7 +218,11 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   color-scheme: dark;
+}
+
+html, body {
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* ─────────────────────────────────────────
@@ -166,38 +231,45 @@
 :root {
   --bento-gap: 2rem;
   --bento-padding: 2.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+
+  /* shadcn/ui tokens — set to the Liquid Brutalism dark theme by default.
+     Previously these were light-mode values (white bg, black text), which
+     meant any unstyled shadcn component (Card, Popover, Input, etc.) would
+     render light and clash with the site's actual dark aesthetic unless a
+     `.dark` class happened to be applied higher up the tree. Now the base
+     theme IS the dark liquid theme, matching color-scheme: dark above. */
+  --background: oklch(0.138 0.016 284.18);      /* void */
+  --foreground: oklch(0.964 0 0);                /* white-100 */
+  --card: oklch(0.172 0.025 287.3);              /* ink */
+  --card-foreground: oklch(0.964 0 0);
+  --popover: oklch(0.172 0.025 287.3);           /* ink */
+  --popover-foreground: oklch(0.964 0 0);
+  --primary: oklch(0.658 0.181 268.159);         /* electric */
+  --primary-foreground: oklch(0.138 0.016 284.18); /* void, for text on electric buttons */
+  --secondary: oklch(0.282 0.104 281.156);       /* deepIndigo */
+  --secondary-foreground: oklch(0.964 0 0);
+  --muted: oklch(0.282 0.104 281.156);           /* deepIndigo */
+  --muted-foreground: oklch(0.738 0.042 291.672); /* matches existing body-copy secondary #aaa6c3 */
+  --accent: oklch(0.716 0.164 293.852);          /* violet */
+  --accent-foreground: oklch(0.138 0.016 284.18);
+  --destructive: oklch(0.704 0.191 22.216);      /* unchanged — error red stays off-palette on purpose */
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.658 0.181 268.159);            /* electric focus rings */
+  --chart-1: oklch(0.658 0.181 268.159);         /* electric */
+  --chart-2: oklch(0.716 0.164 293.852);         /* violet */
+  --chart-3: oklch(0.909 0.143 164.232);         /* mint */
+  --chart-4: oklch(0.556 0 0);
+  --chart-5: oklch(0.371 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.172 0.025 287.3);           /* ink */
+  --sidebar-foreground: oklch(0.964 0 0);
+  --sidebar-primary: oklch(0.658 0.181 268.159); /* electric */
+  --sidebar-primary-foreground: oklch(0.138 0.016 284.18);
+  --sidebar-accent: oklch(0.282 0.104 281.156);  /* deepIndigo */
+  --sidebar-accent-foreground: oklch(0.964 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.658 0.181 268.159);
 }
 
 [data-density="compact"] {
@@ -222,10 +294,10 @@
 }
 
 .liquid-glass-accent {
-  background: rgba(74, 144, 226, 0.05); /* neuroBlue hint */
+  background: rgba(99, 136, 255, 0.06); /* electric hint */
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(74, 144, 226, 0.15);
+  border: 1px solid rgba(99, 136, 255, 0.16);
 }
 
 /* BRUTALIST TILES */
@@ -233,12 +305,38 @@
   border: 3px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes borderRotate {
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+.brutalist-tile::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 200%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(from 0deg, transparent 70%, rgba(170, 140, 255, 0.85) 100%);
+  animation: borderRotate 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.brutalist-tile:hover::before {
+  opacity: 1;
 }
 
 .brutalist-tile:hover {
-  border-color: #4a90e2;
-  box-shadow: 8px 8px 0px #4a90e2;
-  transform: translate(-4px, -4px);
+  border-color: transparent;
+  box-shadow: 8px 8px 0px rgba(99, 136, 255, 0.85);
 }
 
 /* ── Nav link underline animation ── */
@@ -247,9 +345,13 @@
   display: block;
   width: 0;
   height: 3px;
-  background: #292929;
+  background: linear-gradient(90deg, var(--color-electric), var(--color-mint));
   margin: auto;
   transition: 0.5s;
+}
+
+.nav-links:hover {
+  color: var(--color-electric);
 }
 
 .nav-links:hover::after {
@@ -301,6 +403,20 @@ img {
     0 0 18px rgba(153, 153, 161, 0.06);
 }
 
+/* Page-wide spacing container that uses the mechanism density tokens for consistent gaps */
+.page-container {
+  padding-left: var(--bento-padding);
+  padding-right: var(--bento-padding);
+}
+
+.page-container > * {
+  margin-top: var(--bento-gap);
+  margin-bottom: var(--bento-gap);
+}
+
+/* Make small utilities available for components that want tighter control */
+.content-pad { padding-left: calc(var(--bento-padding) / 2); padding-right: calc(var(--bento-padding) / 2); }
+
 /* Icon ring inside service cards */
 .glass-icon-ring {
   background: rgba(255, 255, 255, 0.06);
@@ -331,7 +447,7 @@ html {
   background: rgba(0,0,0,0.2);
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(180, 144, 229, 0.3);
+  background: rgba(170, 140, 255, 0.35);
   border-radius: 10px;
 }
 
@@ -347,29 +463,29 @@ html {
 .app-background {
   background: linear-gradient(
     to bottom right,
-    #0f172a,  /* slate-900 */
-    #1e1b4b,  /* purple tint */
-    #0f172a   /* slate-900 */
+    #08080f,  /* void */
+    #231e5a,  /* deepIndigo */
+    #08080f   /* void */
   );
 }
 
-/* Light Mode Overrides */
+/* Light Mode Overrides (kept for any future light-theme toggle) */
 .light {
   --glass-bg: rgba(0, 0, 0, 0.03);
   --glass-border: rgba(0, 0, 0, 0.08);
   --text-primary: rgba(0, 0, 0, 0.9);
   --text-secondary: rgba(0, 0, 0, 0.6);
 
-  /* Softer glows for light mode */
-  --glow-cyan: rgba(6, 182, 212, 0.15);
-  --glow-purple: rgba(147, 51, 234, 0.15);
+  /* Glows retuned to electric/violet instead of generic cyan/purple */
+  --glow-cyan: rgba(99, 136, 255, 0.15);
+  --glow-purple: rgba(170, 140, 255, 0.15);
 }
 
 /* Contact form inputs */
 .contact-input {
   background: rgba(15, 15, 15, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  border-radius: 1.5rem;
   padding: 1rem 1.25rem;
   color: #d4d4d8;
   font-size: 15px;
@@ -674,38 +790,40 @@ html {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Explicit .dark class kept as a mirror of :root for safety — in case any
+   provider (e.g. next-themes) adds `dark` to <html>, nothing changes. */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.138 0.016 284.18);
+  --foreground: oklch(0.964 0 0);
+  --card: oklch(0.172 0.025 287.3);
+  --card-foreground: oklch(0.964 0 0);
+  --popover: oklch(0.172 0.025 287.3);
+  --popover-foreground: oklch(0.964 0 0);
+  --primary: oklch(0.658 0.181 268.159);
+  --primary-foreground: oklch(0.138 0.016 284.18);
+  --secondary: oklch(0.282 0.104 281.156);
+  --secondary-foreground: oklch(0.964 0 0);
+  --muted: oklch(0.282 0.104 281.156);
+  --muted-foreground: oklch(0.738 0.042 291.672);
+  --accent: oklch(0.716 0.164 293.852);
+  --accent-foreground: oklch(0.138 0.016 284.18);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.658 0.181 268.159);
+  --chart-1: oklch(0.658 0.181 268.159);
+  --chart-2: oklch(0.716 0.164 293.852);
+  --chart-3: oklch(0.909 0.143 164.232);
+  --chart-4: oklch(0.556 0 0);
+  --chart-5: oklch(0.371 0 0);
+  --sidebar: oklch(0.172 0.025 287.3);
+  --sidebar-foreground: oklch(0.964 0 0);
+  --sidebar-primary: oklch(0.658 0.181 268.159);
+  --sidebar-primary-foreground: oklch(0.138 0.016 284.18);
+  --sidebar-accent: oklch(0.282 0.104 281.156);
+  --sidebar-accent-foreground: oklch(0.964 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: oklch(0.658 0.181 268.159);
 }
 
 @layer base {

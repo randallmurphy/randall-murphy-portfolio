@@ -46,6 +46,7 @@ import n8n         from '../assets/tech/n8n.png';
 import jonaProject     from '../assets/projects/jona.jpg';
 import compassProject  from '../assets/projects/compass.jpg';
 import nexaraProject   from '../assets/projects/nexara.png';
+import homeSourcetn   from '../assets/projects/homesourcetn.jpg';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface NavLink {
@@ -212,6 +213,20 @@ const projects: Project[] = [
     demo: 'https://banyanlabs.io/products/compass',
   },
   {
+    id: 'project-5',
+    name: 'HommeSourcetn',
+    description:
+      'HomeSource - Your Path to Sustainable Homeownership in East Tennessee',
+    tags: [
+      { name: 'react',    color: 'blue-text-gradient' },
+      { name: 'rest api', color: 'green-text-gradient' },
+      { name: 'scss',     color: 'pink-text-gradient' },
+    ],
+    image: homeSourcetn,
+    repo: 'https://github.com/Banyan-Labs/homesource',
+    demo: 'https://homesource--hset-website.us-east4.hosted.app/',
+  },
+  {
     id: 'project-4',
     name: 'create-murphy-backend',
     description:
@@ -225,20 +240,7 @@ const projects: Project[] = [
     repo: 'https://github.com/randallmurphy/create-murphy-backend',
     demo: 'https://www.npmjs.com/package/create-murphy-backend',
   },
-  {
-    id: 'project-5',
-    name: 'wealthMap',
-    description:
-      'Cash flow budgeting app tracking income, expenses, assets, and liabilities. Financial clarity for people who deserve it.',
-    tags: [
-      { name: 'react',    color: 'blue-text-gradient' },
-      { name: 'rest api', color: 'green-text-gradient' },
-      { name: 'scss',     color: 'pink-text-gradient' },
-    ],
-    image: wealthMap,
-    repo: 'https://github.com/randallmurphy/wealthMap',
-    demo: '',
-  },
+  
   {
     id: 'project-6',
     name: 'TodoApp',

@@ -12,6 +12,7 @@ import {
   MechanismToggles,
   NeonPulseTracker,
   Footer,
+  ScrollToTop,
 } from '@/components';
 import { useMechanism } from '@/components/MechanismProvider';
 import { motion } from 'framer-motion';
@@ -20,30 +21,29 @@ export default function Home() {
   const { bentoMode } = useMechanism();
 
   return (
-    <div className="relative w-full min-h-screen bg-pureBlack selection:bg-neuroBlue selection:text-white-100 transition-colors duration-500">
+    <div className="relative w-full min-h-screen bg-pureBlack selection:bg-neuroBlue selection:text-white-100 transition-colors duration-500 overflow-x-hidden px-[2%] sm:px-0">
       <Toaster
         position="top-right"
         toastOptions={{
           style: {
             background: 'rgba(0, 0, 0, 0.8)',
             backdropFilter: 'blur(16px)',
-            border: '2px solid rgba(74, 144, 226, 0.5)',
+            border: '2px solid rgba(99, 136, 255, 0.5)',
             color: '#f4f4f5',
             borderRadius: '16px',
             fontSize: '15px',
-            boxShadow: '4px 4px 0px rgba(74, 144, 226, 0.8)'
+            boxShadow: '4px 4px 0px rgba(99, 136, 255, 0.8)'
           },
         }}
         richColors
       />
+      <ScrollToTop />
       
       <NeonPulseTracker />
-      <MechanismToggles />
-      <Navbar />
 
       {bentoMode === 'hybrid' ? (
         // HYBRID MODE - Standard scrollytelling sections but individual sections use bento where appropriate
-        <div className="w-full flex flex-col gap-[var(--bento-gap)] p-[var(--bento-padding)] transition-all duration-300 pt-28">
+        <div className="w-full flex flex-col gap-[var(--bento-gap)] px-[2%] sm:px-[var(--bento-padding)] transition-all duration-300 pt-28">
           <div className="w-full brutalist-tile liquid-glass p-4 sm:p-8">
             <Hero />
           </div>
@@ -64,13 +64,13 @@ export default function Home() {
             <Experience />
           </div>
           
-          <div className="w-full brutalist-tile p-4 sm:p-8 border-warmCoral/60 hover:shadow-brutal-coral mb-20">
+          <div className="w-full brutalist-tile p-4 sm:p-8 border-sageNeon/60 hover:shadow-brutal-sage mb-20">
             <Contact />
           </div>
         </div>
       ) : (
         // FULL BENTO MODE - An asymmetrical CSS Grid treating each component as a tile
-        <div className="w-full min-h-screen transition-all duration-300 pt-28 pb-20 p-[var(--bento-padding)]">
+        <div className="w-full min-h-screen transition-all duration-300 pt-28 pb-20 px-[2%] sm:px-[var(--bento-padding)]">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[var(--bento-gap)] auto-rows-min">
             
             {/* HERO TILE (Span 2 cols on Large screens) */}
@@ -99,7 +99,7 @@ export default function Home() {
             </motion.div>
             
             {/* CONTACT TILE */}
-            <motion.div layout className="col-span-1 md:col-span-2 xl:col-span-3 brutalist-tile liquid-glass p-6 border-warmCoral/30 hover:border-warmCoral hover:shadow-brutal-coral">
+            <motion.div layout className="col-span-1 md:col-span-2 xl:col-span-3 brutalist-tile liquid-glass p-6 border-sageNeon/30 hover:border-sageNeon hover:shadow-brutal-sage">
               <Contact />
             </motion.div>
           </div>

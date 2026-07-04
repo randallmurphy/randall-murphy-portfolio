@@ -47,7 +47,7 @@ export const TimelineAnimation = <
     once,
   });
 
-  const MotionComponent = motion[as || 'div'] as React.ElementType;
+  const MotionComponent = motion[as || 'div'] as React.ElementType<Record<string, unknown>>;
 
   return (
     <MotionComponent
@@ -56,7 +56,7 @@ export const TimelineAnimation = <
       custom={animationNum}
       variants={sequenceVariants}
       className={className}
-      {...props}
+      {...(props as Record<string, unknown>)}
     >
       {children}
     </MotionComponent>

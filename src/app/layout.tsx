@@ -37,7 +37,9 @@ export default function RootLayout({
       <body className="bg-pureBlack antialiased text-white-100">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <MechanismProvider>
-            {children}
+            <main className="page-container">
+              {children}
+            </main>
           </MechanismProvider>
         </ThemeProvider>
       </body>
