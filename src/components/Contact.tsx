@@ -73,9 +73,9 @@ const Contact = () => {
     <CinematicSection id="contact" className="min-h-[80vh] flex justify-center items-center py-28 my-10">
       <motion.div
         variants={slideIn('left', 'tween', 0.2, 0.8)}
-        className="w-full max-w-[1000px] brutalist-tile liquid-glass rounded-[2.5rem] border border-electricLavender/30 shadow-[0_0_45px_rgba(180,144,229,0.18)] mx-auto overflow-hidden"
+        className="w-full max-w-[1000px] mx-auto"
       >
-        <div className="w-full grid gap-12 p-10 sm:p-12 md:p-14 pt-12 pb-12">
+        <div className="w-full grid gap-12 p-6 sm:p-8">
           <div className="text-center">
             <p className="text-electricLavender uppercase tracking-[0.35em] text-xs font-bold mb-2">Transmission Link</p>
             <h3 className="text-5xl md:text-7xl font-mova text-white mb-2">Contact.</h3>
