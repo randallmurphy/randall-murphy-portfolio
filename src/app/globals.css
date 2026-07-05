@@ -211,13 +211,19 @@
   src: url('/fonts/overcame-outline.woff');
 }
 
-/* ── Base resets ── */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  color-scheme: dark;
+/* ── Base resets ──
+   Must live inside @layer base: CSS Cascade Layers give unlayered rules
+   higher precedence than ANY layered rule regardless of specificity, so an
+   unlayered `* { margin: 0; padding: 0 }` here would silently null out every
+   Tailwind margin/padding utility (all in @layer utilities) sitewide. */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
 }
 
 html, body {
@@ -356,23 +362,6 @@ html, body {
 
 .nav-links:hover::after {
   width: 70%;
-}
-
-/* ── Section hash anchors ── */
-#about {
-  margin-left: -24px;
-  font-size: 100px;
-}
-
-#projects {
-  margin-left: -2px;
-  font-size: 100px;
-}
-
-#contact {
-  margin-left: -20px;
-  font-size: 95px;
-  letter-spacing: -2px;
 }
 
 .hash-span {
@@ -567,13 +556,6 @@ html {
 
 .vertical-timeline-element-content-arrow {
   top: 28px !important;
-}
-
-/* ─────────────────────────────────────────
-   GLOBAL ANIMATION PERFORMANCE
-───────────────────────────────────────── */
-[data-motion] {
-  will-change: transform, opacity;
 }
 
 /* Reduced motion support */

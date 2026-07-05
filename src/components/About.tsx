@@ -54,11 +54,13 @@ ServiceCard.displayName = "ServiceCard";
 
 const About = () => {
   const { bentoMode } = useMechanism();
+  const isBento = bentoMode === 'full';
+
   return (
     <CinematicSection id="about" className="!pt-20 !pb-36 sm:!pb-44">
-      <motion.div className="w-full flex flex-col items-center text-center gap-4 mb-8">
+      <motion.div className="w-full flex flex-col items-stretch text-center gap-4 mb-8 min-w-0">
         <p className="text-neuroBlue uppercase tracking-wider text-sm font-bold mb-1">The Frequency</p>
-        <h2 className="text-5xl md:text-7xl font-mova text-white">Neural Architecture.</h2>
+        <h2 className={`font-mova text-white break-words ${isBento ? 'text-3xl md:text-4xl' : 'text-5xl md:text-7xl'}`}>Neural Architecture.</h2>
       </motion.div>
 
       <motion.p
@@ -75,7 +77,7 @@ const About = () => {
         the inside out.
       </motion.p>
 
-      <div className={`w-full pt-10 pb-16 grid gap-8 ${bentoMode === 'full' ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+      <div className={`w-full pt-10 pb-16 grid gap-8 ${isBento ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}

@@ -24,22 +24,22 @@ const Hero = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          className={`w-full ${isBento ? 'w-full flex flex-col items-center justify-center text-center' : 'md:w-1/2 flex flex-col items-start justify-center'}`}
+          className={`w-full min-w-0 ${isBento ? 'w-full flex flex-col items-stretch justify-center text-center' : 'md:w-1/2 flex flex-col items-start justify-center'}`}
         >
-          <div className="flex gap-4 items-center mb-6">
+          <div className={`flex gap-4 items-center mb-6 ${isBento ? 'justify-center' : ''}`}>
             <div className="w-16 h-1 bg-electricLavender" />
             <h2 className="text-sageNeon uppercase tracking-widest font-bold text-sm">System Architect</h2>
             {isBento && <div className="w-16 h-1 bg-electricLavender" />}
           </div>
-          
-          <h1 className="text-white font-poppins uppercase text-5xl sm:text-6xl lg:text-7xl leading-[1.1] mb-6 drop-shadow-md">
+
+          <h1 className={`text-white font-poppins uppercase leading-[1.1] mb-6 drop-shadow-md break-words ${isBento ? 'text-4xl sm:text-5xl lg:text-6xl' : 'text-5xl sm:text-6xl lg:text-7xl'}`}>
             Hi, IAM <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neuroBlue to-electricLavender font-mova font-extrabold text-[70px] sm:text-[90px] lg:text-[110px] leading-[0.9]">
+            <span className={`text-transparent bg-clip-text bg-gradient-to-r from-neuroBlue to-electricLavender font-mova font-extrabold leading-[0.9] ${isBento ? 'text-[48px] sm:text-[64px] lg:text-[80px]' : 'text-[70px] sm:text-[90px] lg:text-[110px]'}`}>
               RANDALL
             </span>
           </h1>
 
-          <p className="mt-2 text-white/80 text-lg md:text-xl font-poppins max-w-[60ch] leading-relaxed">
+          <p className={`mt-2 text-white/80 text-lg md:text-xl font-poppins max-w-[60ch] leading-relaxed ${isBento ? 'self-center' : ''}`}>
             A results-driven Full Stack Developer specializing in backend systems and DevOps, with deep expertise in the MERN stack. I build scalable, maintainable, and high-performance applications that drive business growth and elevate user experiences.
           </p>
         </motion.div>

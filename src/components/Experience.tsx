@@ -10,6 +10,7 @@ import { experiences, type Experience as ExperienceType } from "../constants";
 import { CinematicSection } from "./CinematicSection";
 import { useMechanism } from "./MechanismProvider";
 import { toSrc } from "../utils/image";
+import ResumeModal from "./ResumeModal";
 
 // The shared Experience type in constants.ts doesn't declare `points`,
 // but some entries in the data include it — extend locally rather than
@@ -81,6 +82,7 @@ const ExperienceCard = ({ experience }: { experience: ExperienceWithPoints }) =>
 export default function Experience() {
   const { bentoMode } = useMechanism();
   const isBento = bentoMode === 'full';
+  const [isResumeOpen, setIsResumeOpen] = React.useState(false);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -105,20 +107,20 @@ export default function Experience() {
   return (
     <CinematicSection
       id="experience"
-      className={`my-12 relative border-white/5 border-t ${isBento ? 'h-[800px] overflow-y-auto scrollbar-hide' : ''}`}
-      innerClassName="pt-24 pb-24"
+      className={`relative border-white/5 border-t ${isBento ? '' : 'my-12'}`}
+      innerClassName={isBento ? 'pt-4 pb-8' : 'pt-24 pb-24'}
     >
       <style>{globalTimelineOverrides}</style>
-      
-      <div className="w-full pt-10 pb-10">
-        <div className="w-full text-center flex flex-col items-center mb-20 pointer-events-none">
-          <p className="text-sageNeon uppercase tracking-widest text-sm font-bold mb-4 bg-sageNeon/10 px-4 py-1 rounded-full border border-sageNeon/20">System Logs</p>
-          <h2 className='text-5xl md:text-7xl font-mova text-center tracking-widest text-white drop-shadow-md'>
+
+      <div className={`w-full ${isBento ? 'pt-0 pb-4' : 'pt-10 pb-10'}`}>
+        <div className={`w-full text-center flex flex-col items-stretch min-w-0 pointer-events-none ${isBento ? 'mb-6' : 'mb-20'}`}>
+          <p className="self-center w-fit text-sageNeon uppercase tracking-widest text-sm font-bold mb-4 bg-sageNeon/10 px-4 py-1 rounded-full border border-sageNeon/20">System Logs</p>
+          <h2 className={`font-mova text-center tracking-widest text-white drop-shadow-md break-words ${isBento ? 'text-3xl md:text-4xl' : 'text-5xl md:text-7xl'}`}>
             Career Timeline.
           </h2>
         </div>
 
-        <div className='w-full mt-10 flex flex-col'>
+        <div className='w-full mt-10 flex flex-col px-4 md:px-6'>
           <VerticalTimeline animate={true} lineColor="rgba(170, 140, 255, 0.2)">
             {(experiences as ExperienceWithPoints[]).map((experience, index: number) => (
               <ExperienceCard
@@ -156,7 +158,7 @@ export default function Experience() {
             >
               <button
                 className="flex justify-between text-white font-bold font-mova items-center py-4 px-6 md:px-8 gap-4 rounded-xl bg-white/5 hover:bg-electricLavender hover:text-black transition duration-300 ease-in-out border border-white/20 hover:border-electricLavender w-full md:w-auto"
-                onClick={() => window.open('/randall-murphy-resume.pdf', '_blank')}
+                onClick={() => setIsResumeOpen(true)}
               >
                 MY RESUME
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-bounce"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -165,6 +167,8 @@ export default function Experience() {
           </VerticalTimeline>
         </div>
       </div>
+
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </CinematicSection>
   );
 }

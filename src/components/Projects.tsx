@@ -13,7 +13,7 @@ function Gallery({ setIndex, index, bentoMode }: {
 }) {
   const isBento = bentoMode === 'full';
   return (
-    <div className={`w-full max-w-7xl mx-auto flex flex-col gap-3 lg:flex-row lg:gap-4 pb-16 pt-10 ${isBento ? 'min-h-[600px]' : 'min-h-[400px]'}`}>
+    <div className={`w-full max-w-7xl mx-auto flex flex-col gap-3 lg:flex-row lg:gap-4 px-4 md:px-6 pb-16 pt-10 ${isBento ? 'min-h-[600px]' : 'min-h-[400px]'}`}>
       {projects.map((item, i) => (
         <motion.div
           key={item.id}
@@ -79,7 +79,7 @@ export default function Projects() {
   const isBento = bentoMode === 'full';
 
   return (
-    <CinematicSection id="projects" className={`flex flex-col justify-center overflow-hidden ${isBento ? 'h-[800px] overflow-y-auto scrollbar-hide' : 'min-h-[70vh]'}`}>
+    <CinematicSection id="projects" className={`flex flex-col justify-center ${isBento ? '' : 'min-h-[70vh]'}`}>
       <div className="w-full text-center md:text-left mb-6 md:pl-8">
         <p className="text-electricLavender uppercase tracking-wider text-sm font-bold mb-2">The Signal</p>
         <h2 className="text-5xl md:text-7xl font-mova text-white">Transmissions.</h2>
