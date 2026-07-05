@@ -195,7 +195,7 @@ const projects: Project[] = [
       { name: 'typescript',  color: 'pink-text-gradient' },
     ],
     image: nexaraProject,
-    repo: 'https://github.com/Banyan-Labs/banyan-onboarding-portal',
+    repo: '',
     demo: 'https://banyan-onboarding-portal--banyan-labs-training.us-east4.hosted.app/welcome',
   },
   {
@@ -223,7 +223,7 @@ const projects: Project[] = [
       { name: 'scss',     color: 'pink-text-gradient' },
     ],
     image: homeSourcetn,
-    repo: 'https://github.com/Banyan-Labs/homesource',
+    repo: '',
     demo: 'https://homesource--hset-website.us-east4.hosted.app/',
   },
   {
@@ -237,7 +237,7 @@ const projects: Project[] = [
       { name: 'mongodb',  color: 'pink-text-gradient' },
     ],
     image: npmCreateMurphyBackend,
-    repo: 'https://github.com/randallmurphy/create-murphy-backend',
+    repo: '',
     demo: 'https://www.npmjs.com/package/create-murphy-backend',
   },
   
@@ -252,7 +252,7 @@ const projects: Project[] = [
       { name: 'css',      color: 'pink-text-gradient' },
     ],
     image: todoApp,
-    repo: 'https://github.com/randallmurphy/todoApp',
+    repo: '',
     demo: 'https://todo.randalmurphy.com/',
   },
   // {
