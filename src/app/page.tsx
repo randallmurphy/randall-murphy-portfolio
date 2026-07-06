@@ -74,7 +74,7 @@ export default function Home() {
 
       {bentoMode === 'hybrid' ? (
         // HYBRID MODE - Standard scrollytelling sections but individual sections use bento where appropriate
-        <div className="w-full flex flex-col gap-[var(--bento-gap)] px-[2%] sm:px-[var(--bento-padding)] transition-all duration-300 pt-28">
+        <div className="w-full flex flex-col gap-[var(--bento-gap)] sm:px-[var(--bento-padding)] transition-all duration-300 pt-28">
           <div className="w-full brutalist-tile liquid-glass p-4 sm:p-8">
             <Hero />
           </div>

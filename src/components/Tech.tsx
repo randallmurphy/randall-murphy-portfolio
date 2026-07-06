@@ -55,9 +55,9 @@ const Tech = () => {
         <h2 className="text-4xl md:text-6xl font-mova text-white mb-6">Technologies.</h2>
       </motion.div>
 
-      <div className="w-full max-w-5xl mx-auto flex flex-row flex-wrap justify-center items-center gap-10 sm:gap-14">
+      <div className="w-full max-w-5xl mx-auto flex flex-row flex-wrap justify-center items-center gap-4 xs:gap-6 sm:gap-10 md:gap-14">
         {technologies.map((technology, index) => (
-          <div key={technology.name} className="w-24 h-24 sm:w-28 sm:h-28 bg-black/20 rounded-full shadow-[0_0_20px_rgba(180,144,229,0.1)] p-1.5 relative group overflow-hidden">
+          <div key={technology.name} className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-black/20 rounded-full shadow-[0_0_20px_rgba(180,144,229,0.1)] p-1.5 relative group overflow-hidden">
             <LazyBall icon={toSrc(technology.icon)} index={index} />
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-pureBlack/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
               {technology.name}

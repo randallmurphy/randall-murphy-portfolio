@@ -14,7 +14,7 @@ const Hero = () => {
   const isBento = bentoMode === 'full';
 
   return (
-    <CinematicSection id="hero" className="sm:mt-0 mt-16 pb-0">
+    <CinematicSection id="hero" className={`!pt-40 ${isBento ? 'sm:!pt-6' : 'sm:!pt-12 md:!pt-20'} pb-0`}>
       <MechanismToggles inline />
       <Navbar inline />
       <div className={`w-full flex ${isBento ? 'flex-col text-center' : 'flex-col md:flex-row'} items-center justify-between h-full relative z-10 gap-10`}>
@@ -34,7 +34,7 @@ const Hero = () => {
 
           <h1 className={`text-white font-poppins uppercase leading-[1.1] mb-6 drop-shadow-md break-words ${isBento ? 'text-4xl sm:text-5xl lg:text-6xl' : 'text-5xl sm:text-6xl lg:text-7xl'}`}>
             Hi, IAM <br />
-            <span className={`text-transparent bg-clip-text bg-gradient-to-r from-neuroBlue to-electricLavender font-mova font-extrabold leading-[0.9] ${isBento ? 'text-[48px] sm:text-[64px] lg:text-[80px]' : 'text-[70px] sm:text-[90px] lg:text-[110px]'}`}>
+            <span className={`text-transparent bg-clip-text bg-gradient-to-r from-neuroBlue to-electricLavender font-mova font-extrabold leading-[0.9] ${isBento ? 'text-[36px] xxs:text-[42px] xs:text-[48px] sm:text-[64px] lg:text-[80px]' : 'text-[44px] xxs:text-[52px] xs:text-[64px] sm:text-[90px] lg:text-[110px]'}`}>
               RANDALL
             </span>
           </h1>
