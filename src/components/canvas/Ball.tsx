@@ -49,6 +49,10 @@ const Ball = ({ imgUrl, index }: { imgUrl: string; index: number }) => {
 
 const BallCanvas = ({ icon, index }: { icon: string; index: number }) => {
   const glRef = useRef<WebGLRenderer | null>(null);
+  // Small/touch screens get a lighter render config — antialiasing + a high pixel
+  // ratio on 15 concurrent WebGL contexts is a real battery/frame-rate cost on phones.
+  const isLowPowerViewport =
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 640px), (pointer: coarse)').matches;
 
   useEffect(() => {
     return () => {
@@ -62,10 +66,10 @@ const BallCanvas = ({ icon, index }: { icon: string; index: number }) => {
       style={{ width: '100%', height: '100%' }}
       camera={{ position: [0, 0, 4.2], fov: 50 }}
       frameloop="always"
-      gl={{ antialias: true, preserveDrawingBuffer: false }}
+      gl={{ antialias: !isLowPowerViewport, preserveDrawingBuffer: false }}
       onCreated={({ gl }) => {
         glRef.current = gl;
-        const pixelRatio = Math.min(window.devicePixelRatio, 2);
+        const pixelRatio = Math.min(window.devicePixelRatio, isLowPowerViewport ? 1 : 2);
         gl.setPixelRatio(pixelRatio);
       }}
     >

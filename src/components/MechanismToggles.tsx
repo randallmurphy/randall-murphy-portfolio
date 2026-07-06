@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useMechanism } from "./MechanismProvider";
-import { motion } from "framer-motion";
 
 export const MechanismToggles = ({ inline }: { inline?: boolean }) => {
   const { density, setDensity, reducedMotion, setReducedMotion, bentoMode, setBentoMode } = useMechanism();
+  const [open, setOpen] = useState(false);
 
   // Tactile feedback on click
   const handleTactileClick = () => {
@@ -15,11 +15,27 @@ export const MechanismToggles = ({ inline }: { inline?: boolean }) => {
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`${inline ? 'absolute top-4 right-4' : 'fixed top-4 right-4'} z-[130] flex flex-col gap-3 liquid-glass p-3 rounded-2xl`}
-    >
+    <div className={`${inline ? 'absolute top-4 right-4' : 'fixed top-4 right-4'} z-[130] flex flex-col items-end gap-3`}>
+      {/* Mobile trigger — full panel is always visible at sm and above */}
+      <button
+        type="button"
+        onClick={() => { handleTactileClick(); setOpen((s) => !s); }}
+        className="sm:hidden inline-flex h-11 w-11 items-center justify-center rounded-[0.9rem] border border-white/15 bg-white/10 text-white transition hover:bg-white/15"
+        aria-label={open ? "Close display settings" : "Open display settings"}
+        aria-expanded={open}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <circle cx="15" cy="6" r="2" fill="currentColor" stroke="none" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <circle cx="9" cy="12" r="2" fill="currentColor" stroke="none" />
+          <line x1="4" y1="18" x2="20" y2="18" />
+          <circle cx="17" cy="18" r="2" fill="currentColor" stroke="none" />
+        </svg>
+      </button>
+
+      {/* Panel: toggled by the trigger above on mobile, always visible from sm up */}
+      <div className={`${open ? "flex" : "hidden"} sm:flex flex-col gap-3 liquid-glass p-3 rounded-2xl`}>
       {/* Density Toggle */}
       <div className="flex flex-col gap-1">
         <span className="text-[10px] uppercase tracking-wider text-neuroBlue font-bold">Density</span>
@@ -76,6 +92,7 @@ export const MechanismToggles = ({ inline }: { inline?: boolean }) => {
           </button>
         </div>
       </div>
-    </motion.div>
+      </div>
+    </div>
   );
 };

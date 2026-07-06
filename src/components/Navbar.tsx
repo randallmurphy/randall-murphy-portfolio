@@ -24,25 +24,25 @@ const Navbar = ({ inline }: { inline?: boolean }) => {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 120, damping: 20 }}
-        className="pointer-events-auto relative flex w-full max-w-[20rem] flex-col gap-3 overflow-visible rounded-[1.25rem] border border-white/15 bg-void/78 px-4 py-4 mb-6 shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-[20px]"
+        className="pointer-events-auto relative flex w-full max-w-[11.5rem] xs:max-w-[16rem] sm:max-w-[20rem] flex-col gap-3 overflow-visible rounded-[1.25rem] border border-white/15 bg-void/78 px-3 py-3 sm:px-4 sm:py-4 sm:mb-6 shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-[20px]"
       >
         <div className="flex flex-col gap-2">
           <Link
             href="/"
-            className="z-10 flex items-center gap-3"
+            className="z-10 flex items-center gap-2 sm:gap-3"
             onClick={() => {
               setActive("");
               window.scrollTo(0, 0);
             }}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-electric via-violet to-mint text-sm font-semibold uppercase tracking-[0.28em] text-white shadow-[0_0_24px_rgba(99,136,255,0.24)]">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-electric via-violet to-mint text-[0.7rem] sm:text-sm font-semibold uppercase tracking-[0.28em] text-white shadow-[0_0_24px_rgba(99,136,255,0.24)]">
               RM
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[0.82rem] font-semibold uppercase tracking-[0.32em] text-white/90">
+            <div className="flex flex-col leading-tight min-w-0">
+              <span className="text-[0.62rem] xs:text-[0.72rem] sm:text-[0.82rem] font-semibold uppercase tracking-[0.08em] xs:tracking-[0.18em] sm:tracking-[0.32em] text-white/90">
                 Randall Murphy
               </span>
-              <span className="mt-1 text-[0.68rem] uppercase tracking-[0.26em] text-mint/80">
+              <span className="mt-1 text-[0.52rem] xs:text-[0.6rem] sm:text-[0.68rem] uppercase tracking-[0.06em] xs:tracking-[0.14em] sm:tracking-[0.26em] text-mint/80">
                 Full Stack Engineer
               </span>
             </div>
